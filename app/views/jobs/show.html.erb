@@ -1,2 +1,38 @@
-<h1>Jobs#show</h1>
-<p>Find me in app/views/jobs/show.html.erb</p>
+<h1>Job: <%= @job.title %></h1>
+<ul>
+    <li><%= @job.desc %></li>
+    <li>Price: $<%= @job.price %></li>
+    <li>Street: <%= @job.user.address_street %></li>
+    <li>City: <%= @job.user.address_city %></li>
+    <li>Email: <%= @job.user.email %></li>
+    <li> Categories:
+    <% @job.categories.each do |category| %>
+        <p><%= category.name %></p>
+    <% end  %>
+    </li>
+
+  
+    <% if @job.image_1.present? %>
+        <li><%= image_tag @job.image_1%></li>
+    <% end  %>
+      <% if @job.image_2.present? %>
+        <li><%= image_tag @job.image_2%></li>
+    <% end  %>
+      <% if @job.image_3.present? %>
+        <li><%= image_tag @job.image_3%></li>
+    <% end  %>
+    <li>Completed: <%= @job.completed %></li>
+    <li>Created: <%= @job.created_at %></li>
+    <li>Modified: <%= @job.updated_at %></li>
+</ul>
+Comments:
+    <% @job.comments.each do |comment| %>
+        <%= comment.comment %>
+        <%= @users.find(comment.user_id).first_name %>
+        (<%= @users.find(comment.user_id).email %>)
+ 
+
+    <% end  %>
+
+
+

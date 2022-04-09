@@ -12,16 +12,18 @@ u1 = User.create :first_name => "Joe", :last_name => "Bloggs", :email => "joeblo
 
 u2 = User.create :first_name => "Bill", :last_name => "Blanks", :email => "billblanks@gmail.com", :password => "Password456", :address_num => "140", :address_street => "Liverpool St", :address_suburb => "Surry Hills", :address_city => "Sydney", :address_country => "Australia", :address_postcode => "2010", :phone => "0401111111", :latitude => nil, :longitude => nil, :can_post => true, :admin => false
 
+u3 = User.create :first_name => "Ed", :last_name => "Tester", :email => "edtester@gmail.com", :password => "Password789", :address_num => "33", :address_street => "Parker St", :address_suburb => "Haymarket", :address_city => "Sydney", :address_country => "Australia", :address_postcode => "2000", :phone => "0402222222", :latitude => nil, :longitude => nil, :can_post => true, :admin => false
+
 puts "#{ User.count } users"
 
 
 Job.destroy_all
 
-j1 = Job.create :title => "Garden Clean Up", :desc => "I need someone to spend 2 hours tidying up my front and back yard. Will pay $100", :price => 100, :image_1 => "http://placekitten.com/g/200/300"
+j1 = Job.create :title => "Garden Needs Clean Up", :desc => "I need someone to spend 2 hours tidying up my front and back yard. Will pay $100", :price => 100, :image_1 => "http://placekitten.com/g/200/300"
 
-j2 = Job.create :title => "Lawn Mowing", :desc => "Some easy Lawn Mowing. Should only take 45 minutes. Will pay $70", :price => 70, :image_1 => "http://placekitten.com/g/200/300"
+j2 = Job.create :title => "I need Lawn Mowing", :desc => "Some easy Lawn Mowing. Should only take 45 minutes. Will pay $70", :price => 70, :image_1 => "http://placekitten.com/g/200/300"
 
-j3 = Job.create :title => "Weeding", :desc => "I've got lots of weeds in my front yard. Please can you remove them?", :price => 120, :image_1 => "http://placekitten.com/g/200/300", :image_2 => "http://placekitten.com/g/200/300", :image_3 => "http://placekitten.com/g/200/300"
+j3 = Job.create :title => "I need some Weeding", :desc => "I've got lots of weeds in my front yard. Please can you remove them?", :price => 120, :image_1 => "http://placekitten.com/g/200/300", :image_2 => "http://placekitten.com/g/200/300", :image_3 => "http://placekitten.com/g/200/300"
 
 puts "#{ Job.count } jobs"
 
@@ -37,11 +39,34 @@ puts "#{ Comment.count } comments"
 
 Category.destroy_all
 
-t1 = Category.create :name => "Lawn mowing/edging"
+t1 = Category.create :name => "Lawn mowing / edging"
 t2 = Category.create :name => "Yard tidy up"
 t3 = Category.create :name => "Weeding"
 
 puts "#{ Category.count } categories"
+
+j1.categories << t2
+j2.categories << t1
+j3.categories << t3
+j3.categories << t2
+
+u1.jobs << j1
+u2.jobs << j2
+u3.jobs << j3
+
+c1.user_id = u3.id
+c2.user_id = u1.id
+c3.user_id = u2.id
+
+j1.comments << c1
+j2.comments << c2
+j3.comments << c3
+
+
+
+
+
+
 
 
 
