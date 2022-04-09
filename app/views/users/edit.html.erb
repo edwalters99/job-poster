@@ -1,0 +1,40 @@
+<h1>Edit your details <%= @user.first_name %>:</h1>
+
+
+<!-- Renders validation error messages  -->
+<% if @user.errors.any? %>
+    <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+        <li class="error"> <%= msg %></li>
+        <% end  %>
+    </ul>
+<% end  %>
+
+<%= form_for @user do |f| %>
+
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+    <%= f.label :address_num, "House/Apt No." %>
+    <%= f.text_field :address_num %>
+    <%= f.label :address_street, "Street" %>
+    <%= f.text_field :address_street %>
+    <%= f.label :address_suburb, "Suburb" %>
+    <%= f.text_field :address_suburb %>
+    <%= f.label :address_city, "City" %>
+    <%= f.text_field :address_city %>
+    <%= f.label :address_postcode, "Postcode" %>
+     <%= f.text_field :address_postcode %>
+    <%= f.label :address_country, "Country" %>
+    <%= f.text_field :address_country %>
+    <%= f.label :phone %>
+    <%= f.phone_field :phone %>
+ 
+    <%= f.submit "Save Changes" %>
+
+<% end %>
+
+CHANGE PASSWORD TO BE DONE

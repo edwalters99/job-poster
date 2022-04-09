@@ -54,9 +54,9 @@ u1.jobs << j1
 u2.jobs << j2
 u3.jobs << j3
 
-c1.user_id = u3.id
-c2.user_id = u1.id
-c3.user_id = u2.id
+u1.comments << c2
+u2.comments << c3
+u3.comments << c1
 
 j1.comments << c1
 j2.comments << c2

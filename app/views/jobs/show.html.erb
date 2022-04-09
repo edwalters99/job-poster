@@ -26,13 +26,16 @@
     <li>Modified: <%= @job.updated_at %></li>
 </ul>
 Comments:
+<ul>
     <% @job.comments.each do |comment| %>
-        <%= comment.comment %>
-        <%= @users.find(comment.user_id).first_name %>
-        (<%= @users.find(comment.user_id).email %>)
- 
+        <li><%= comment.created_at %> ***
+        <%= comment.comment %> ***
+        <%= comment.user.first_name %> ***
+        (<%= comment.user.email %>)</li> 
+    <% end %>
+</ul>
 
-    <% end  %>
+
 
 
 

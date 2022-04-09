@@ -7,10 +7,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
   </head>
 
   <body>
+  <nav>
+
+    <%= link_to "Home", root_path %>
+    <%= link_to 'All Jobs', jobs_path %>
+    <% if @current_user.present? %>
+      <%= link_to "Sign Out #{ @current_user.first_name }", login_path, :method => 'delete' %>
+    <% else %>
+      <%= link_to "Sign In", login_path %>
+    <% end %>
+  </nav>
     <%= yield %>
   </body>
 </html>
