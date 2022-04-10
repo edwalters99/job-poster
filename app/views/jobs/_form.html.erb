@@ -1,0 +1,18 @@
+<%= form_for @job do |f| %>
+
+    <%= f.label :title, {:required => true} %>
+    <%= f.text_field :title %>
+    <%= f.label :desc, "Description" %>
+    <%= f.text_area :desc, :size => "50x10" %>
+    <%= f.label :price, "Price $"%>
+    <%= f.number_field :price %>
+    <%= f.label :image_1, "Image 1 URL" %>
+    <%= f.text_field :image_1 %>
+     <%= f.label :image_2, "Image 2 URL" %>
+    <%= f.text_field :image_2 %>
+    <%= f.label :image_3, "Image 3 URL" %>
+    <%= f.text_field :image_3 %>
+
+    <%= f.submit "Post" %>
+
+<% end %>

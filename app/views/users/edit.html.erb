@@ -13,23 +13,23 @@
 <%= form_for @user do |f| %>
 
     <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
+    <%= f.text_field :first_name, :required => true %>
     <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
+    <%= f.text_field :last_name, :required => true %>
     <%= f.label :email %>
-    <%= f.email_field :email %>
+    <%= f.email_field :email, :required => true %>
     <%= f.label :address_num, "House/Apt No." %>
-    <%= f.text_field :address_num %>
+    <%= f.text_field :address_num, :required => true %>
     <%= f.label :address_street, "Street" %>
-    <%= f.text_field :address_street %>
+    <%= f.text_field :address_street, :required => true %>
     <%= f.label :address_suburb, "Suburb" %>
-    <%= f.text_field :address_suburb %>
+    <%= f.text_field :address_suburb, :required => true %>
     <%= f.label :address_city, "City" %>
-    <%= f.text_field :address_city %>
+    <%= f.text_field :address_city, :required => true %>
     <%= f.label :address_postcode, "Postcode" %>
-     <%= f.text_field :address_postcode %>
+     <%= f.text_field :address_postcode, :required => true %>
     <%= f.label :address_country, "Country" %>
-    <%= f.text_field :address_country %>
+    <%= f.text_field :address_country, :required => true %>
     <%= f.label :phone %>
     <%= f.phone_field :phone %>
  

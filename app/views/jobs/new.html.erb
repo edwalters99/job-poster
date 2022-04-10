@@ -1,2 +1,8 @@
-<h1>Jobs#new</h1>
-<p>Find me in app/views/jobs/new.html.erb</p>
+<h1>Post a new job for <%= @current_user.first_name %> <%= @current_user.last_name %> </h1>
+
+<% if @current_user.address_street == nil ||  @current_user.address_suburb == nil || @current_user.address_city == nil || @current_user.address_country == nil ||  @current_user.address_postcode == nil  %>
+    <%= "You can't post a job yet as you haven't provided your address details. Please" %>
+    <%= link_to "update your profile now!", edit_user_path(@current_user) %>
+<% else %>
+    <%= render :partial => 'form' %>
+<% end %>
