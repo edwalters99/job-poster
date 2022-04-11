@@ -28,8 +28,17 @@ class JobsController < ApplicationController
   end
   
   def edit
-
+    @job = Job.find params[:id]
+    check_for_owner @job  #protects against seeing the edit page for a job other than your own
   end
+
+  def update
+    job = Job.find params[:id]
+    check_for_owner job
+    job.update job_params
+    redirect_to job
+  end
+    
 
   def destroy 
     job = Job.find params[:id]
