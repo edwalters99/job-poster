@@ -17,6 +17,10 @@ class UsersController < ApplicationController
     @user = @current_user
   end
 
+  def edit_password
+    @user = @current_user
+  end
+
   def update
       user = User.find(@current_user.id)
       user.update user_params

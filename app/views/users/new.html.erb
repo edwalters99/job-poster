@@ -1,5 +1,6 @@
 <h1>Join the site!</h1>
 
+<!-- Renders validation error messages  -->
 <% if @user.errors.any? %>
     <ul>
         <% @user.errors.full_messages.each do |msg| %>

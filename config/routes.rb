@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   
   resources :users
   resources :jobs
+  resources :comments, :only => [:create]
+  get '/jobs/:id/comments/new' => 'comments#new', :as => 'new_comment'
+
   
   get '/:id/jobs' => 'jobs#index_my', :as => 'my_jobs'
+  get '/users/:id/changepassword' => 'users#edit_password', :as => 'edit_user_password'
 end

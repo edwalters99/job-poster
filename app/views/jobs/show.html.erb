@@ -27,12 +27,13 @@
 </ul>
 Comments:
 <ul>
-    <% @job.comments.each do |comment| %>
+    <% @job.comments.order(:created_at).reverse_order.each do |comment| %>
         <li><%= comment.created_at %> ***
         <%= comment.comment %> ***
         <%= comment.user.first_name %> ***
         (<%= comment.user.email %>)</li> 
     <% end %>
+    <%= link_to "Add Comment", new_comment_path %>
 </ul>
 
 
