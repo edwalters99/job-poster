@@ -13,7 +13,7 @@
     Existing comments:
     <ul>
     <% @job.comments.order(:created_at).reverse_order.each do |comment| %>
-        <li><%= comment.created_at %> ***
+        <li><%= comment.created_at.strftime '%B %d, %Y, %l:%M %p' %> ***
         <%= comment.comment %> ***
         <%= comment.user.first_name %> ***
         (<%= comment.user.email %>)</li> 

@@ -1,7 +1,7 @@
 <h1>Job: <%= @job.title %></h1>
 <ul>
     <li><%= @job.desc %></li>
-    <li>Price: $<%= @job.price %></li>
+    <li>Price: <%= number_to_currency @job.price, precision: 0 %></li>
     <li>Street: <%= @job.user.address_street %></li>
     <li>City: <%= @job.user.address_city %></li>
     <li>Email: <%= @job.user.email %></li>
@@ -22,8 +22,8 @@
         <li><%= image_tag @job.image_3%></li>
     <% end  %>
     <li>Completed: <%= @job.completed %></li>
-    <li>Created: <%= @job.created_at %></li>
-    <li>Modified: <%= @job.updated_at %></li>
+    <li>Created: <%= @job.created_at.strftime '%B %d, %Y, %l:%M %p' %></li>
+    <li>Last Modified: <%= @job.updated_at.strftime '%B %d, %Y, %l:%M %p' %></li>
 </ul>
 <strong>Comments:</strong>
   
@@ -33,7 +33,7 @@
  <%= link_to "Add Comment", new_comment_path %>
 <ul>
     <% @job.comments.order(:created_at).reverse_order.each do |comment| %>
-        <li><%= comment.created_at %> ***
+        <li><%= comment.created_at.strftime '%B %d, %Y, %l:%M %p' %> ***
         <%= comment.comment %> ***
         <%= comment.user.first_name %> ***
         (<%= comment.user.email %>)</li> 
