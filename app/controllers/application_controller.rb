@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
     def check_for_login #security - prevents access to site functionality when not logged in
         redirect_to login_path unless @current_user.present?
     end
+
+    def check_for_owner (obj) #performs check that non owners of jobs or comments are unable to delete or edit
+        redirect_to login_path unless obj.user_id == @current_user.id
+    end
 end

@@ -31,6 +31,13 @@ class JobsController < ApplicationController
 
   end
 
+  def destroy 
+    job = Job.find params[:id]
+    check_for_owner job
+    job.destroy
+    redirect_to my_jobs_path
+  end
+
 private
   
 def job_params

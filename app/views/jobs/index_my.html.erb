@@ -7,6 +7,8 @@
 <% @jobs.each do |job| %>
     <%= link_to job_path(job) do %>
         <div class="box"><%= job.title  %></div>
+        <%= link_to "Edit", edit_job_path(job.id) %>
+        <%= link_to "Delete", job_path(job.id), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
     <% end%>
 <% end%>
 
