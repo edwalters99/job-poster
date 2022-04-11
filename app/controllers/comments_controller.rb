@@ -7,9 +7,30 @@ class CommentsController < ApplicationController
     end
 
     def create
-        @comment = Comment.create comment_params
-        @comment.save
+        comment = Comment.create comment_params
+        comment.save
         redirect_to job_path params[:comment][:job_id] 
+    end
+
+    def edit 
+        @comment = Comment.find params[:id]
+        check_for_owner @comment  #protects against seeing the edit page for a job other than your own
+    end
+
+    def update
+        comment = Comment.find params[:id]
+        check_for_owner comment
+        comment.update comment_params
+        redirect_to job_path(comment.job_id)
+      end
+        
+
+    def destroy
+        comment = Comment.find params[:id]
+        job = comment.job_id
+        check_for_owner comment
+        comment.destroy
+        redirect_to job_path(job)
     end
     
     private

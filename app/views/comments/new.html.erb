@@ -10,14 +10,19 @@
 <% end  %>
 
 <% if @job.comments.exists? %>
-    Exisiting comments:
+    Existing comments:
     <ul>
-        <% @job.comments.order(:created_at).reverse_order.each do |comment| %>
-            <li><%= comment.created_at %> ***
-            <%= comment.comment %> ***
-            <%= comment.user.first_name %> ***
-            (<%= comment.user.email %>)</li>
-        <% end %>
-    </ul>
+    <% @job.comments.order(:created_at).reverse_order.each do |comment| %>
+        <li><%= comment.created_at %> ***
+        <%= comment.comment %> ***
+        <%= comment.user.first_name %> ***
+        (<%= comment.user.email %>)</li> 
+        <!-- Comment owner only -->
+        <% if comment.user_id == @current_user.id %>
+        <%= link_to "Edit comment", edit_comment_path(comment) %>
+          <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
+        <% end  %>
+    <% end %>
+</ul>
 <% end  %>
 

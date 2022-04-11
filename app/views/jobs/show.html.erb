@@ -25,22 +25,28 @@
     <li>Created: <%= @job.created_at %></li>
     <li>Modified: <%= @job.updated_at %></li>
 </ul>
-Comments:
+<strong>Comments:</strong>
+  
+    <% if @job.comments.length == 0 %>
+        <p>No comments yet</p>
+    <% end  %>
+ <%= link_to "Add Comment", new_comment_path %>
 <ul>
     <% @job.comments.order(:created_at).reverse_order.each do |comment| %>
         <li><%= comment.created_at %> ***
         <%= comment.comment %> ***
         <%= comment.user.first_name %> ***
         (<%= comment.user.email %>)</li> 
+        <!-- Comment owner only -->
         <% if comment.user_id == @current_user.id %>
-        <%= link_to "Delete comment coming soon", comments_path  %>
-        <%= link_to "Edit comment? coming soon", comments_path  %>
+        <%= link_to "Edit comment", edit_comment_path(comment) %>
+          <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
         <% end  %>
     <% end %>
-    <%= link_to "Add Comment", new_comment_path %>
 </ul>
 
-<% if @job.user_id == @current_user.id %>
+<!-- Job owner only -->
+<% if @job.user_id == @current_user.id %>  
     <%= link_to "Edit Job", edit_job_path(@job.id) %>
     <%= link_to "Delete Job", job_path(@job.id), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
 <% end  %>

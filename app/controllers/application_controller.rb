@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
         redirect_to login_path unless @current_user.present?
     end
 
-    def check_for_owner (obj) #performs check that non owners of jobs or comments are unable to delete or edit
-        redirect_to login_path unless obj.user_id == @current_user.id
+    def check_for_owner (obj) #prevents non owners of jobs or comments deleting or editing them
+        redirect_to root_path unless obj.user_id == @current_user.id
     end
 end
