@@ -36,7 +36,7 @@
     </ul></li>
 
     <% if @job.image_1.present? %>
-        <li><%= image_tag @job.image_1%></li>
+        <li><%= cl_image_tag(@job.image_1) %></li>
     <% end  %>
       <% if @job.image_2.present? %>
         <li><%= image_tag @job.image_2%></li>
@@ -62,12 +62,12 @@
  <% end%>
 
 <ul>
-    <% @job.comments.order(:created_at).reverse_order.each do |comment| %>
-        <li><%= comment.created_at.strftime '%B %d, %Y, %l:%M %p' %> ***
+    <% @job.comments.order(:updated_at).reverse_order.each do |comment| %>
+        <li><%= comment.updated_at.strftime '%B %d, %Y, %l:%M %p' %> ***
         <%= comment.comment %> ***
         <%= comment.user.first_name %> ***
         <!-- Comment owner only -->
-        <% if comment.user_id == @current_user.id && !@job.assigned_to == nil %>
+        <% if comment.user_id == @current_user.id && @job.assigned_to == nil %>
             <%= link_to "Edit comment", edit_comment_path(comment) %>
             <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
         <% end  %>

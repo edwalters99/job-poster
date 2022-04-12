@@ -7,7 +7,7 @@
     </ul>
 <% end  %>
 
-<%= form_for @job do |f| %>
+<%= form_for @job, :html => {:multipart => true} do |f| %>
 
     <%= f.label :title %>
     <%= f.text_field :title, :required => true %>
@@ -17,8 +17,8 @@
     <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, :required => true %> <br>
     <%= f.label :price, "Price $"%>
     <%= f.number_field :price, :required => true %>
-    <%= f.label :image_1, "Image 1 URL" %>
-    <%= f.text_field :image_1, :required => true %>
+    <%= f.label "Photo" %>
+    <%= f.cl_image_upload :image_1 %>
      <%= f.label :image_2, "Image 2 URL" %>
     <%= f.text_field :image_2 %>
     <%= f.label :image_3, "Image 3 URL" %>

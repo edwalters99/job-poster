@@ -12,8 +12,8 @@
 <% if @job.comments.exists? %>
     Existing comments:
     <ul>
-    <% @job.comments.order(:created_at).reverse_order.each do |comment| %>
-        <li><%= comment.created_at.strftime '%B %d, %Y, %l:%M %p' %> ***
+    <% @job.comments.order(:updated_at).reverse_order.each do |comment| %>
+        <li><%= comment.updated_at.strftime '%B %d, %Y, %l:%M %p' %> ***
         <%= comment.comment %> ***
         <%= comment.user.first_name %> ***
         (<%= comment.user.email %>)</li> 
