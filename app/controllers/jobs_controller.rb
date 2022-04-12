@@ -45,14 +45,14 @@ class JobsController < ApplicationController
   end
 
   def update
-    @job = Job.find params[:id]
+    job = Job.find params[:id]
     check_for_owner job
     if params[:file].present?
       req = Cloudinary::Uploader.upload(params[:file])
-      @job.image_1 = req["public_id"]
+      job.image_1 = req["public_id"]
     end
-    @job.update_attributes job_params
-    @job.save
+    job.update_attributes job_params
+    job.save
     redirect_to job
   end
     
