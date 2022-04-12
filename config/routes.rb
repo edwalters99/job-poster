@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   
   get '/:id/jobs' => 'jobs#index_my', :as => 'my_jobs'
 
+  get '/:id/jobs/assigned' => 'jobs#index_my_assigned', :as => 'my_assigned_jobs'
+
   post '/jobs/:id/assign' => 'jobs#assign', :as => 'assign_job'  
   
   get '/users/:id/changepassword' => 'users#edit_password', :as => 'edit_user_password'

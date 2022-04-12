@@ -3,9 +3,19 @@
 
 <% if @job.assigned_to.present? %> <!-- If job has been assigned -->
    <h2>Job has been assigned to: <%= @assigned_user.first_name  %></h2>
+   
    <% if @current_user == @job.user %> <!-- Display contact details for job owner -->
-    <h2>You can now contact <%= "#{ @assigned_user.first_name } #{ @assigned_user.last_name }: #{ @assigned_user.email } #{ @assigned_user.phone }"%> </h2>
-   <% end  %>
+    <h2>You can now contact <%= "#{ @assigned_user.first_name } #{ @assigned_user.last_name }" %> </h2>
+    <h3> <%= "#{ @assigned_user.email } #{ @assigned_user.phone }" %> </h3>
+   <% end %>
+
+    <% if @current_user.id == @job.assigned_to %> <!-- Display contact details for job assignee -->
+    <h2>You have been assigned this job! You can now contact <%= "#{ @job.user.first_name } #{ @job.user.last_name }" %> </h2>
+    <h3> <%= "#{ @job.user.email } #{ @job.user.phone }" %> </h3>
+   <% end %>
+
+
+
 <% end%>
 
 <ul>
@@ -19,11 +29,11 @@
     
     <%= @job.user.address_street %></li>
     <li>City: <%= @job.user.address_city %></li>
-    <li> Categories:
+    <li><ul> Categories:
     <% @job.categories.each do |category| %>
-        <p><%= category.name %></p>
+        <li><%= category.name %></li>
     <% end  %>
-    </li>
+    </ul></li>
 
     <% if @job.image_1.present? %>
         <li><%= image_tag @job.image_1%></li>

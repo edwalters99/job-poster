@@ -9,6 +9,10 @@ class JobsController < ApplicationController
     @jobs = @current_user.jobs
   end
 
+  def index_my_assigned
+    @jobs = Job.all
+  end
+
   def show
     @job = Job.find params[:id]
     if @job.assigned_to.present?
