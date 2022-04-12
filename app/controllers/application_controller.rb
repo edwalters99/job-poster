@@ -14,4 +14,5 @@ class ApplicationController < ActionController::Base
     def check_for_owner (obj) #prevents non owners of jobs or comments deleting or editing them
         redirect_to root_path unless obj.user_id == @current_user.id
     end
+
 end

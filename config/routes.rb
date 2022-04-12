@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/jobs/:id/comments/new' => 'comments#new', :as => 'new_comment'
   
   get '/:id/jobs' => 'jobs#index_my', :as => 'my_jobs'
+
+  post '/jobs/:id/assign' => 'jobs#assign', :as => 'assign_job'  
   
   get '/users/:id/changepassword' => 'users#edit_password', :as => 'edit_user_password'
 

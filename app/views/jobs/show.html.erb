@@ -21,7 +21,7 @@
       <% if @job.image_3.present? %>
         <li><%= image_tag @job.image_3%></li>
     <% end  %>
-    <li>Completed: <%= @job.completed %></li>
+    <li>Completed TBC FIELD: <%= @job.completed %></li>
     <li>Created: <%= @job.created_at.strftime '%B %d, %Y, %l:%M %p' %></li>
     <li>Last Modified: <%= @job.updated_at.strftime '%B %d, %Y, %l:%M %p' %></li>
 </ul>
@@ -40,8 +40,17 @@
         <!-- Comment owner only -->
         <% if comment.user_id == @current_user.id %>
         <%= link_to "Edit comment", edit_comment_path(comment) %>
-          <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
+        <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
         <% end  %>
+        <!-- Job owner only -->
+        <% if @job.user_id == @current_user.id %>
+        <%= form_tag assign_job_path do %>
+            <%= hidden_field_tag :job_id,  @job.id %>
+            <%= hidden_field_tag :assignee_user_id, comment.user.id %>
+            <%= submit_tag "Assign Job to #{ comment.user.first_name }", :data => { :confirm => 'Are you sure?'} %>
+        <% end  %>
+        <% end  %>
+
     <% end %>
 </ul>
 

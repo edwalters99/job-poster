@@ -39,7 +39,6 @@ class JobsController < ApplicationController
     redirect_to job
   end
     
-
   def destroy 
     job = Job.find params[:id]
     check_for_owner job
@@ -47,11 +46,18 @@ class JobsController < ApplicationController
     redirect_to my_jobs_path
   end
 
+  def assign #assign a job to a comment poster
+    job = Job.find params[:job_id]
+    job.assigned_to = params[:assignee_user_id]
+    raise "hell"
+  end
+
+
 private
   
 def job_params
-   
-      params.require(:job).permit(:title, :desc, :price, :image_1, :image_2, :image_3, :category_ids => [])
+
+      params.require(:job).permit(:title, :desc, :price, :image_1, :image_2, :image_3, :assignee_user_id, :category_ids => [])
 end
 
 # def job_params
