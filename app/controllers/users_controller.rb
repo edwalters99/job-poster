@@ -19,13 +19,17 @@ class UsersController < ApplicationController
 
   def edit_password
     @user = @current_user
+
   end
 
   def update
-      user = User.find(@current_user.id)
-      user.update user_params
+    @user = @current_user
+    if @user.update user_params
       redirect_to root_path
-  end
+    else
+      render :edit # re-render form to try again
+    end
+end
 
   def destroy
   end

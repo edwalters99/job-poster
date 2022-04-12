@@ -11,6 +11,9 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find params[:id]
+    if @job.assigned_to.present?
+        @assigned_user = User.find @job.assigned_to
+    end
   end
   
   def new
@@ -49,7 +52,8 @@ class JobsController < ApplicationController
   def assign #assign a job to a comment poster
     job = Job.find params[:job_id]
     job.assigned_to = params[:assignee_user_id]
-    raise "hell"
+    job.save
+    redirect_to job_path(job)
   end
 
 

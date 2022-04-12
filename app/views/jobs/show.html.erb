@@ -1,17 +1,30 @@
-<h1>Job: <%= @job.title %></h1>
+<h1>Job: <%= @job.title %> </h1>
+<h2>Posted by <%= @job.user.first_name %></h2>
+
+<% if @job.assigned_to.present? %> <!-- If job has been assigned -->
+   <h2>Job has been assigned to: <%= @assigned_user.first_name  %></h2>
+   <% if @current_user == @job.user %> <!-- Display contact details for job owner -->
+    <h2>You can now contact <%= "#{ @assigned_user.first_name } #{ @assigned_user.last_name }: #{ @assigned_user.email } #{ @assigned_user.phone }"%> </h2>
+   <% end  %>
+<% end%>
+
 <ul>
     <li><%= @job.desc %></li>
     <li>Price: <%= number_to_currency @job.price, precision: 0 %></li>
-    <li>Street: <%= @job.user.address_street %></li>
+    
+    <li>Address: 
+     <% if @job.assigned_to.present? && @current_user == @job.user %> <!-- Display house number only when job has been assigned and to job owner -->
+        <%= @job.user.address_num %>
+    <% end %>
+    
+    <%= @job.user.address_street %></li>
     <li>City: <%= @job.user.address_city %></li>
-    <li>Email: <%= @job.user.email %></li>
     <li> Categories:
     <% @job.categories.each do |category| %>
         <p><%= category.name %></p>
     <% end  %>
     </li>
 
-  
     <% if @job.image_1.present? %>
         <li><%= image_tag @job.image_1%></li>
     <% end  %>
@@ -21,34 +34,40 @@
       <% if @job.image_3.present? %>
         <li><%= image_tag @job.image_3%></li>
     <% end  %>
-    <li>Completed TBC FIELD: <%= @job.completed %></li>
-    <li>Created: <%= @job.created_at.strftime '%B %d, %Y, %l:%M %p' %></li>
+    <li>Job posted on: <%= @job.created_at.strftime '%B %d, %Y, %l:%M %p' %></li>
     <li>Last Modified: <%= @job.updated_at.strftime '%B %d, %Y, %l:%M %p' %></li>
+
 </ul>
+
+
+
 <strong>Comments:</strong>
   
     <% if @job.comments.length == 0 %>
         <p>No comments yet</p>
     <% end  %>
- <%= link_to "Add Comment", new_comment_path %>
+
+ <% if @job.assigned_to == nil %>
+    <%= link_to "Add Comment", new_comment_path %>
+ <% end%>
+
 <ul>
     <% @job.comments.order(:created_at).reverse_order.each do |comment| %>
         <li><%= comment.created_at.strftime '%B %d, %Y, %l:%M %p' %> ***
         <%= comment.comment %> ***
         <%= comment.user.first_name %> ***
-        (<%= comment.user.email %>)</li> 
         <!-- Comment owner only -->
-        <% if comment.user_id == @current_user.id %>
-        <%= link_to "Edit comment", edit_comment_path(comment) %>
-        <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
+        <% if comment.user_id == @current_user.id && !@job.assigned_to == nil %>
+            <%= link_to "Edit comment", edit_comment_path(comment) %>
+            <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
         <% end  %>
-        <!-- Job owner only -->
-        <% if @job.user_id == @current_user.id %>
+        <!-- Assign job button - Job owner only and if job is unassigned -->
+        <% if @job.user_id == @current_user.id && @job.assigned_to == nil && comment.user_id != @current_user.id %>
         <%= form_tag assign_job_path do %>
             <%= hidden_field_tag :job_id,  @job.id %>
             <%= hidden_field_tag :assignee_user_id, comment.user.id %>
-            <%= submit_tag "Assign Job to #{ comment.user.first_name }", :data => { :confirm => 'Are you sure?'} %>
-        <% end  %>
+            <%= submit_tag "Assign Job to #{ comment.user.first_name }", :data => { :confirm => "Assign Job to #{ comment.user.first_name }?"} %>
+            <% end  %>
         <% end  %>
 
     <% end %>
@@ -56,7 +75,10 @@
 
 <!-- Job owner only -->
 <% if @job.user_id == @current_user.id %>  
-    <%= link_to "Edit Job", edit_job_path(@job.id) %>
+     <% if @job.assigned_to == nil %>
+        <%= link_to "Edit Job", edit_job_path(@job.id) %>
+    <% end%>
+    
     <%= link_to "Delete Job", job_path(@job.id), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
 <% end  %>
 
