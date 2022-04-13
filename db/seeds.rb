@@ -19,11 +19,11 @@ puts "#{ User.count } users"
 
 Job.destroy_all
 
-j1 = Job.create :title => "Garden Needs Clean Up", :desc => "I need someone to spend 2 hours tidying up my front and back yard. Will pay $100", :price => 100, :image_1 => "http://placekitten.com/g/200/300"
+j1 = Job.create :title => "Garden Needs Clean Up", :desc => "I need someone to spend 2 hours tidying up my front and back yard. Will pay $100", :price => 100, images: ["avrjztsik2kxygqj1w5n"]
 
-j2 = Job.create :title => "I need Lawn Mowing", :desc => "Some easy Lawn Mowing. Should only take 45 minutes. Will pay $70", :price => 70, :image_1 => "http://placekitten.com/g/200/300"
+j2 = Job.create :title => "I need Lawn Mowing", :desc => "Some easy Lawn Mowing. Should only take 45 minutes. Will pay $70", :price => 70, images: ["avrjztsik2kxygqj1w5n"]
 
-j3 = Job.create :title => "I need some Weeding", :desc => "I've got lots of weeds in my front yard. Please can you remove them?", :price => 120, :image_1 => "http://placekitten.com/g/200/300", :image_2 => "http://placekitten.com/g/200/300", :image_3 => "http://placekitten.com/g/200/300"
+j3 = Job.create :title => "I need some Weeding", :desc => "I've got lots of weeds in my front yard. Please can you remove them?", :price => 120, images: ["avrjztsik2kxygqj1w5n"]
 
 puts "#{ Job.count } jobs"
 
