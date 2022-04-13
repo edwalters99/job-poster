@@ -14,7 +14,7 @@
   <nav>
 
     <%= link_to "Home", root_path %>
-    <%= link_to 'All Jobs', jobs_path %>
+    <%= link_to 'All Active Jobs', jobs_path %>
     <% if @current_user.present? %>
       <%= link_to "Sign Out #{ @current_user.first_name }", login_path, :method => 'delete' %>
     <% else %>

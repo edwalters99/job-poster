@@ -6,12 +6,16 @@ Rails.application.routes.draw do
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy'
   
+
+
   resources :users
   resources :jobs
   resources :comments, :only => [:create, :edit, :update, :destroy]
   
+  get '/search' => 'jobs#search'
+
   get '/jobs/:id/comments/new' => 'comments#new', :as => 'new_comment'
-  
+
   get '/:id/jobs' => 'jobs#index_my', :as => 'my_jobs'
 
   get '/:id/jobs/assigned' => 'jobs#index_my_assigned', :as => 'my_assigned_jobs'

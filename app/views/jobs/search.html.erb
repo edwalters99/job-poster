@@ -1,0 +1,12 @@
+<h1>Search results</h1>
+
+<% @results.each do |job| %>
+     <%= link_to job_path(job.id) do %>
+        <div class="box"><%= job.title  %></div>
+    <% end %>
+<% end %>
+
+<% if @results.length == 0 %>
+    <h2>No results found</h2>
+<% end%>
+

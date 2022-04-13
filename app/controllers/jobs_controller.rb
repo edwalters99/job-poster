@@ -2,9 +2,22 @@ class JobsController < ApplicationController
     before_action :check_for_login  #only allow access if logged in
   
     def index
-      @jobs = Job.all
+      if params[:sort] == "created_at"
+        @jobs = Job.order(created_at: :desc)
+      elsif
+        params[:sort] == "created_at_reverse"
+          @jobs = Job.order(:created_at)
+      elsif
+        params[:sort] == "price"
+          @jobs = Job.order(:price)
+      elsif
+        params[:sort] == "price_reverse"
+          @jobs = Job.order(price: :desc)
+        else
+        @jobs = Job.order(params[:created_at])
+      end
     end
-
+   
 
     def index_my # Jobs posted by current_user
       @jobs = @current_user.jobs
@@ -15,6 +28,15 @@ class JobsController < ApplicationController
       @jobs = Job.all
     end
 
+    
+    def search
+      if params[:search].blank?
+        redirect_to root_path
+      else
+        @parameter = params[:search].downcase
+        @results = Job.all.where("lower(title) LIKE :search", search: "%#{ @parameter }%")
+      end
+    end
 
     def show
       @job = Job.find params[:id]
@@ -23,6 +45,7 @@ class JobsController < ApplicationController
       end
     end
   
+
 
     def new
       @job = Job.new
