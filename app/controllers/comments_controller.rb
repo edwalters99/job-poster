@@ -23,7 +23,6 @@ class CommentsController < ApplicationController
         comment.update comment_params
         redirect_to job_path(comment.job_id)
       end
-        
 
     def destroy
         comment = Comment.find params[:id]
@@ -37,6 +36,5 @@ class CommentsController < ApplicationController
     def comment_params
         params.require(:comment).permit(:comment, :job_id, :user_id)
     end
-  
 
 end

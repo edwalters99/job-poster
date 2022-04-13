@@ -39,8 +39,8 @@
          <%= cl_image_tag(i, :width => 300) %>
     <% end %>
 
-    <li>Job posted on: <%= @job.created_at.strftime '%B %d, %Y, %l:%M %p' %></li>
-    <li>Last Modified: <%= @job.updated_at.strftime '%B %d, %Y, %l:%M %p' %></li>
+    <li>Posted: <%= time_ago_in_words(@job.created_at) %> ago</li>
+    <li>Last Updated: <%= time_ago_in_words(@job.updated_at) %> ago</li>
 
 </ul>
 
@@ -57,14 +57,14 @@
  <% end%>
 
 <ul>
-    <% @job.comments.order(:updated_at).reverse_order.each do |comment| %>
-        <li><%= comment.updated_at.strftime '%B %d, %Y, %l:%M %p' %> ***
-        <%= comment.comment %> ***
-        <%= comment.user.first_name %> ***
+     <% @job.comments.order(:updated_at).reverse_order.each do |comment| %>
+        <li><%= time_ago_in_words(comment.updated_at) %> ago<br>
+        "<%= comment.comment %>" by:  
+        <%= comment.user.first_name %>
         <!-- Comment owner only -->
         <% if comment.user_id == @current_user.id && @job.assigned_to == nil %>
-            <%= link_to "Edit comment", edit_comment_path(comment) %>
-            <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
+            <div><%= link_to "Edit comment", edit_comment_path(comment) %>
+            <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?' } %></div>
         <% end  %>
         <!-- Assign job button - Job owner only and if job is unassigned -->
         <% if @job.user_id == @current_user.id && @job.assigned_to == nil && comment.user_id != @current_user.id %>

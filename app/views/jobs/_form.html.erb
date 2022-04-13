@@ -2,13 +2,12 @@
 <% if @job.errors.any? %>
     <ul>
         <% @job.errors.full_messages.each do |msg| %>
-        <li class="error"> <%= msg %></li>
-        <% end  %>
+            <li class="error"> <%= msg %></li>
+        <% end %>
     </ul>
-<% end  %>
+<% end %>
 
 <%= form_for @job, :html => {:multipart => true} do |f| %>
-
     <%= f.label :title %>
     <%= f.text_field :title, :required => true %>
     <%= f.label :desc, "Description" %>
@@ -19,6 +18,5 @@
     <%= f.number_field :price, :required => true %>
     <%= f.label "Job photos" %>
     <%= f.file_field :images, :multiple => true %>
-
     <%= f.submit %>
 <% end %>

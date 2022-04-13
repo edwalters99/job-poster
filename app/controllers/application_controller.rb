@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
         session[:user_id] = nil unless @current_user.present? #log out non existent users
     end
 
-    def check_for_login #security - prevents access to site functionality when not logged in
+    def check_for_login #security - prevents access to site functionality when not logged in - used in controllers
         redirect_to login_path unless @current_user.present?
     end
 
-    def check_for_owner (obj) #prevents non owners of jobs or comments deleting or editing them
+    def check_for_owner (obj) #prevents non owners of jobs or comments deleting or editing - used in controllers
         redirect_to root_path unless obj.user_id == @current_user.id
     end
 

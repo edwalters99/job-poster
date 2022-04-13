@@ -1,12 +1,18 @@
-<h1>Jobs Assigned to <%= @current_user.first_name %> </h1>
+<h1><%= @current_user.first_name %>'s assigned jobs </h1>
 
-
+<% assigned_jobs = false %>
 <% @jobs.each do |job| %>
     <% if job.assigned_to == @current_user.id %>
+        <% assigned_jobs = true %>
         <%= link_to job_path(job) do %>
             <div class="box"><%= job.title %></div>
         <% end%>
     <% end %>
 <% end%>
+
+<% if assigned_jobs == false %>
+    <h2>You don't have any jobs assigned to you! Try again later.</h2>
+<% end%>
+
 
 

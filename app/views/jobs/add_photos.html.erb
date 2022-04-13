@@ -4,15 +4,13 @@
 <% if @job.errors.any? %>
     <ul>
         <% @job.errors.full_messages.each do |msg| %>
-        <li class="error"> <%= msg %></li>
+            <li class="error"> <%= msg %></li>
         <% end  %>
     </ul>
-<% end  %>
+<% end %>
 
-<%= form_for @job, :html => {:multipart => true} do |f| %>
-
+<%= form_for @job, :html => { :multipart => true } do |f| %>
     <%= f.label "Job photos" %>
     <%= f.file_field :images, :multiple => true %>
-
     <%= f.submit %>
 <% end %>
