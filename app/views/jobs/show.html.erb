@@ -35,15 +35,10 @@
     <% end  %>
     </ul></li>
 
-    <% if @job.image_1.present? %>
-        <li><%= cl_image_tag(@job.image_1) %></li>
-    <% end  %>
-      <% if @job.image_2.present? %>
-        <li><%= image_tag @job.image_2%></li>
-    <% end  %>
-      <% if @job.image_3.present? %>
-        <li><%= image_tag @job.image_3%></li>
-    <% end  %>
+    <% @job.images.each do |i| %>
+         <%= cl_image_tag(i, :width => 300) %>
+    <% end %>
+
     <li>Job posted on: <%= @job.created_at.strftime '%B %d, %Y, %l:%M %p' %></li>
     <li>Last Modified: <%= @job.updated_at.strftime '%B %d, %Y, %l:%M %p' %></li>
 
@@ -69,7 +64,7 @@
         <!-- Comment owner only -->
         <% if comment.user_id == @current_user.id && @job.assigned_to == nil %>
             <%= link_to "Edit comment", edit_comment_path(comment) %>
-            <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
+            <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
         <% end  %>
         <!-- Assign job button - Job owner only and if job is unassigned -->
         <% if @job.user_id == @current_user.id && @job.assigned_to == nil && comment.user_id != @current_user.id %>
@@ -89,7 +84,7 @@
         <%= link_to "Edit Job", edit_job_path(@job.id) %>
     <% end%>
     
-    <%= link_to "Delete Job", job_path(@job.id), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
+    <%= link_to "Delete Job", job_path(@job.id), :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
 <% end  %>
 
 

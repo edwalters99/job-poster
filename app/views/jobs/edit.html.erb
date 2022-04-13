@@ -1,5 +1,40 @@
 <h1>Edit job</h1>
 
-<%= render :partial => 'form' %>
+<!-- Renders validation error messages  -->
+<% if @job.errors.any? %>
+    <ul>
+        <% @job.errors.full_messages.each do |msg| %>
+        <li class="error"> <%= msg %></li>
+        <% end  %>
+    </ul>
+<% end  %>
+
+<%= form_for @job, :html => {:multipart => true} do |f| %>
+
+    <%= f.label :title %>
+    <%= f.text_field :title, :required => true %>
+    <%= f.label :desc, "Description" %>
+    <%= f.text_area :desc, :size => "50x10", :required => true %>
+    <%= f.label :categories, "Categories:" %>
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, :required => true %> <br>
+    <%= f.label :price, "Price $"%>
+    <%= f.number_field :price, :required => true %>
+
+    <%= f.submit %>
+<% end %>
+
+    <% @job.images.each do |i| %>
+        <%= cl_image_tag(i, :width => 100) %>
+    <% end %>
+<p></p>
+<%= link_to "Delete all photos", delete_photos_path(@job.id), :data => { :confirm => 'Are you sure?' } %>
+<%= link_to "Add photos", add_photos_path(@job.id) %>
+
+
+
+
+
+
+
 
 

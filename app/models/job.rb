@@ -2,7 +2,6 @@ class Job < ApplicationRecord
     validates :title, :presence => true
     validates :desc, :presence => true
     validates :price, :presence => true
-    validates :image_1, :presence => true
     validates :categories, :presence => true
 
 

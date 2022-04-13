@@ -17,14 +17,8 @@
     <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, :required => true %> <br>
     <%= f.label :price, "Price $"%>
     <%= f.number_field :price, :required => true %>
-    <%= f.label "Photo" %>
-    <%= f.cl_image_upload :image_1 %>
-     <%= f.label :image_2, "Image 2 URL" %>
-    <%= f.text_field :image_2 %>
-    <%= f.label :image_3, "Image 3 URL" %>
-    <%= f.text_field :image_3 %>
+    <%= f.label "Job photos" %>
+    <%= f.file_field :images, :multiple => true %>
+
     <%= f.submit %>
-
-
-
 <% end %>

@@ -25,15 +25,17 @@ class JobsController < ApplicationController
   end
   
   def create
-    @job = Job.create job_params
-    if params[:file].present?
-      req = Cloudinary::Uploader.upload(params[:file])
-      @job.image_1 = req["public_id"]
+    job = Job.new job_params
+    if params[:job][:images].present?
+      params[:job][:images].each do |image|
+        req = Cloudinary::Uploader.upload(image)
+        job.images << req["public_id"]
+      end
     end
 
-    if @job.save
-      @current_user.jobs << @job
-      redirect_to @job
+    if job.save
+      @current_user.jobs << job
+      redirect_to job
     else 
       render :new #render the form again to re-attempt job
     end
@@ -47,9 +49,11 @@ class JobsController < ApplicationController
   def update
     job = Job.find params[:id]
     check_for_owner job
-    if params[:file].present?
-      req = Cloudinary::Uploader.upload(params[:file])
-      job.image_1 = req["public_id"]
+    if params[:job][:images].present?
+      params[:job][:images].each do |image|
+        req = Cloudinary::Uploader.upload(image)
+        job.images << req["public_id"]
+      end
     end
     job.update_attributes job_params
     job.save
@@ -71,15 +75,26 @@ class JobsController < ApplicationController
   end
 
 
-private
+  def add_photos
+    @job = Job.find params[:id] 
+  end
+
+
+  def delete_photos
+    job = Job.find params[:id]
+    check_for_owner job
+    job.images = []
+    job.save
+    redirect_to edit_job_path(job)
+
+  end
+
+
+  private
   
-def job_params
-
+  def job_params
       params.require(:job).permit(:title, :desc, :price, :assignee_user_id, :category_ids => [])
-end
+  end
 
-# def job_params
-#   params[:job][:categories].reject!(&:blank?).map(&:to_i) # wild that this is necessary -_-
-#   params.require(:job).permit(:title, :desc, :price, :image_1, :image_2, :image_3, :categories => [])
-# end
+
 end
