@@ -4,23 +4,26 @@
     <title>Project1</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= cloudinary_js_config %>
   </head>
 
   <body>
-  <nav>
-
-    <%= link_to "Home", root_path %>
-    <%= link_to 'All Active Jobs', jobs_path %>
-    <% if @current_user.present? %>
-      <%= link_to "Sign Out #{ @current_user.first_name }", login_path, :method => 'delete' %>
-    <% else %>
-      <%= link_to "Sign In", login_path %>
-    <% end %>
-  </nav>
+<div class="container">
+    <nav>
+      <%= link_to "Home", root_path %>
+      <%= link_to 'All Active Jobs', jobs_path %>
+      <% if @current_user.present? %>
+        <%= link_to "Sign Out #{ @current_user.first_name }", login_path, :method => 'delete' %>
+      <% else %>
+        <%= link_to "Sign In", login_path %>
+      <% end %>
+    </nav>
     <%= yield %>
+  </div>
   </body>
+
+
 </html>
