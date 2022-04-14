@@ -24,7 +24,8 @@
         <%= @job.user.address_num %>
     <% end %>
 
-   <% if @current_user.distance_to(@job.user) > 0 %>
+  
+   <% if @job.user.latitude != nil && @job.user.longitude != nil %>
         <%= link_to @job.user.address_street, " https://maps.google.com/?ie=UTF8&ll=#{ @job.user.latitude },#{ @job.user.longitude }", target: "_blank" %>
    <% else %>
         <%= @job.user.address_street %>
@@ -35,7 +36,7 @@
 
     
     <li>City: <%= @job.user.address_city %></li>
-    <% if @current_user.distance_to(@job.user) > 0 %>
+      <% if !@current_user.distance_to(@job.user).nil? &&@current_user.distance_to(@job.user) > 0 %>
         <li><%= number_to_human(@current_user.distance_to(@job.user), :precision => 2) %> km away</li>
     <% end %>
     
