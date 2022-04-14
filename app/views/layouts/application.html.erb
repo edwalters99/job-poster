@@ -1,29 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang = "en">
   <head>
-    <title>Project1</title>
+    <title>YardFixer</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= cloudinary_js_config %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
   <body>
-<div class="container">
-    <nav>
-      <%= link_to "Home", root_path %>
-      <%= link_to 'All Active Jobs', jobs_path %>
-      <% if @current_user.present? %>
-        <%= link_to "Sign Out #{ @current_user.first_name }", login_path, :method => 'delete' %>
-      <% else %>
-        <%= link_to "Sign In", login_path %>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <%= link_to "YardFixer", root_path, class: "navbar-brand" %>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <% if user_signed_in %>
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <%= link_to "Home", root_path, class: "nav-link active" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "All Jobs", jobs_path, class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "Post a Job", new_job_path, class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "My Posts", my_jobs_path(@current_user), class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "My Assigned", my_assigned_jobs_path(@current_user.id), class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "Edit My Profile", edit_user_path(@current_user), class: "nav-link" %>
+                </li>                                
+              </ul>
+              <span class="navbar-text">
+                <%= link_to "Sign Out #{ @current_user.first_name }", login_path, :method => 'delete', class: "nav-link" %>
+  
+              <% else %>
+               <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                <span class="navbar-text">
+                  <%= link_to "Sign In", login_path, class: "nav-link" %>
+                </span>
+              <% end %>
+          </div>
+        </div>
+      </nav>
+
+      <% if flash[:message].present? %>
+        <div class="alert alert-success" role="alert">
+          <%= flash[:message] %>
+        </div>
       <% end %>
-    </nav>
-    <%= yield %>
-  </div>
+    
+      <%= yield %>
+
+    </div>
   </body>
-
-
 </html>

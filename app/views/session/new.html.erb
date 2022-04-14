@@ -1,16 +1,15 @@
-<h1>Welcome to the site</h1>
+<h1>Welcome to YardFixer</h1>
+<div class="form">
+    <%= form_tag login_path do  %>
+    <%= label_tag :email, nil, :class => 'form-label' %>
+    <%= email_field_tag :email, nil, :class => 'form-control' %>
 
-<%= form_tag login_path do  %>
-<%= label_tag :email %>
-<%= email_field_tag :email %>
+    <%= label_tag :password, nil, :class => 'form-label' %>
+    <%= password_field_tag :password, nil, :class => 'form-control' %>
 
-<%= label_tag :password %>
-<%= password_field_tag :password %>
-
-<%= submit_tag "Sign in" %>
-<% end %>
-
-
-<h1><%= link_to "Sign up Here", new_user_path %></h2>
+    <%= submit_tag "Sign in", :class => 'btn btn-warning' %>
+    <% end %>
+</div>
+<h2><%= link_to "Sign up Here", new_user_path %></h2>
 
 

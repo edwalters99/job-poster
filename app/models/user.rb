@@ -1,6 +1,7 @@
 class User < ApplicationRecord
     validates :first_name, :presence => true
     validates :email, :presence => true, :uniqueness => true
+    validates :password, :length => {:within => 6..40}, on: :create
     has_secure_password
    
     has_many :jobs

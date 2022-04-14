@@ -1,3 +1,7 @@
+
+
+
+
 .box {
     background-color: aquamarine;
     width: 100px;
@@ -8,19 +12,11 @@
 .error {
     color: red;
 }
+.form-check label {
+    margin-right: 10px;
+    margin-left: 5px;
+}
 
-
-$theme-colors: (
-
-
-    "primary": #1dd900,
-
-
-);
-
-$body-bg: rgb(19, 18, 18);
-
-$navbar-default-color: #000;
-
-$navbar-default-link-color: #000;
-
+.form-group {
+    margin: 0.5em 0;
+}
