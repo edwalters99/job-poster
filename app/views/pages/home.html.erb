@@ -16,7 +16,7 @@
 
 <h2>Search for jobs</h1>
 <%= form_tag(search_path, :method => "get") do %>
-    <%= search_field_tag :search, params[:search], placeholder: "Text ", class: "form-control"  %>
-    <%= button_tag "Search for job", :name => nil %>
+    <%= search_field_tag :search, params[:search], placeholder: "Mowing", class: "form-control"  %>
+    <%= button_tag "Go", :name => nil %>
 <% end %>
  

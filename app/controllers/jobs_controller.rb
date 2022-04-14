@@ -13,8 +13,11 @@ class JobsController < ApplicationController
       elsif
         params[:sort] == "price_reverse"
           @jobs = Job.order(price: :desc)
-        else
-        @jobs = Job.order(params[:created_at])
+      elsif
+        params[:sort] == "distance"
+        @jobs = User.near([@current_user.latitude, @current_user.longitude]).map(&:jobs).flatten
+      else
+          @jobs = Job.order(params[:created_at])
       end
     end
    
@@ -34,9 +37,10 @@ class JobsController < ApplicationController
         redirect_to root_path
       else
         @parameter = params[:search].downcase
-        @results = Job.all.where("lower(title) LIKE :search", search: "%#{ @parameter }%")
+        @results = Job.where("lower(title) LIKE :search", search: "%#{ @parameter }%")
       end
     end
+    
 
     def show
       @job = Job.find params[:id]

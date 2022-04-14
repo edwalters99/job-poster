@@ -23,9 +23,22 @@
      <% if @job.assigned_to.present? && @current_user == @job.user %> <!-- Display house number only when job has been assigned and to job owner -->
         <%= @job.user.address_num %>
     <% end %>
+
+   <% if @current_user.distance_to(@job.user) > 0 %>
+        <%= link_to @job.user.address_street, " https://maps.google.com/?ie=UTF8&ll=#{ @job.user.latitude },#{ @job.user.longitude }", target: "_blank" %>
+   <% else %>
+        <%= @job.user.address_street %>
+   <% end%>
+
     
-    <%= @job.user.address_street %></li>
+    
+
+    
     <li>City: <%= @job.user.address_city %></li>
+    <% if @current_user.distance_to(@job.user) > 0 %>
+        <li><%= number_to_human(@current_user.distance_to(@job.user), :precision => 2) %> km away</li>
+    <% end %>
+    
     <li><ul> Categories:
     <% @job.categories.each do |category| %>
         <li><%= category.name %></li>
