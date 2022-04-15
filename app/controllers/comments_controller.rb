@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
     def create
         comment = Comment.create comment_params
         comment.save
+        flash[:message] = "Your Comment has been posted!"
         redirect_to job_path params[:comment][:job_id] 
     end
 

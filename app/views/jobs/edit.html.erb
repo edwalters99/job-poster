@@ -1,61 +1,50 @@
 <div class="row">
     <div class="col-lg-2"></div>
-<div class="col-lg-8">
-<h1 class="page-heading">Edit job</h1>
+    
+    <div class="col-lg-8">
+        <h1 class="page-heading">Edit job</h1>
 
-<!-- Renders validation error messages  -->
-<% if @job.errors.any? %>
-    <ul>
-        <% @job.errors.full_messages.each do |msg| %>
-            <li class="error"> <%= msg %></li>
-        <% end  %>
-    </ul>
-<% end %>
+        <!-- Renders validation error messages  -->
+        <% if @job.errors.any? %>
+            <ul>
+            <% @job.errors.full_messages.each do |msg| %>
+                <li class="error"> <%= msg %></li>
+            <% end  %>
+            </ul>
+        <% end %>   
 
-<%= form_for @job, :html => { :multipart => true } do |f| %>
-    <div class="form-group">
-        <%= f.label :title, :class => 'form-label' %>
-        <%= f.text_field :title, :required => true, :class => 'form-control'  %>
-    </div>
-    <div class="form-group">
-        <%= f.label :desc, "Description", :class => 'form-label' %>
-        <%= f.text_area :desc, :size => "50x10", :required => true, :class => 'form-control'  %>
-    </div>
-    <div class="form-group">
-        <%= f.label :categories, "Categories:", :class => 'form-label' %>
-        <div class="form-check">
-            <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, :required => true, :class => 'form-check-label' %> <br>
+        <%= form_for @job, :html => { :multipart => true } do |f| %>
+            <div class="form-group">
+                <%= f.label :title, :class => 'form-label' %>
+                <%= f.text_field :title, :required => true, :class => 'form-control'  %>
+            </div>
+            <div class="form-group">
+                <%= f.label :desc, "Description", :class => 'form-label' %>
+                <%= f.text_area :desc, :size => "50x10", :required => true, :class => 'form-control'  %>
+            </div>
+            <div class="form-group">
+                <%= f.label :categories, "Categories:", :class => 'form-label' %>
+                <div class="form-check">
+                    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, :required => true, :class => 'form-check-label' %> 
+                </div>
+            </div>
+            <div class="form-group">
+                <%= f.label :price, "Price $", :class => 'form-label' %>
+                <%= f.number_field :price, :required => true, :class => 'form-control'  %>
+            </div>
+            <%= f.submit :class => 'btn btn-primary btn-lg form-submit' %>
+        <% end %>
+
+        <div class="job-edit-images">
+            <% @job.images.each do |i| %>
+                <%= cl_image_tag(i, :height => 100) %>
+            <% end %>
         </div>
+        <%= link_to "Delete all photos", delete_photos_path(@job), :class => 'btn btn-danger', :data => { :confirm => 'Are you sure?' } %>
+        <%= link_to "Add photos", add_photos_path(@job.id), :class => 'btn btn-warning' %>
     </div>
-    <div class="form-group">
-        <%= f.label :price, "Price $", :class => 'form-label' %>
-        <%= f.number_field :price, :required => true, :class => 'form-control'  %>
-    </div>
-    <%= f.submit :class => 'btn btn-primary btn-lg form-submit' %>
-<% end %>
 
-<div class="job-edit-images">
-    <% @job.images.each do |i| %>
-         <%= cl_image_tag(i, :height => 100) %>
-    <% end %>
-</div>
-
-<div>
-    <%= link_to "Delete all photos", delete_photos_path(@job), :class => 'btn btn-danger', :data => { :confirm => 'Are you sure?' } %>
-    <%= link_to "Add photos", add_photos_path(@job.id), :class => 'btn btn-warning' %>
-</div>
-
-
-</div>
-
-
-
-<div class="col-lg-2"></div>
-
-
-
-
-
+    <div class="col-lg-2"></div>
 
 </div>
 

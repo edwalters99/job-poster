@@ -10,7 +10,6 @@
 <% end %>
 
 <%= form_for @job, :html => { :multipart => true } do |f| %>
-   
     <%= f.file_field :images, :multiple => true, :class => 'form-control', :required => true %>
     <%= f.submit :class => 'btn btn-warning form-submit' %>
 <% end %>

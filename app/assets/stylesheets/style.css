@@ -102,3 +102,9 @@ body {
     border-radius: 10px;
     margin: 4px;
 }
+
+/* comments new */
+
+.comments-new-header {
+    margin-top: 2em;
+}
