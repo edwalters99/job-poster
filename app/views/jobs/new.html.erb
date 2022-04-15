@@ -1,12 +1,14 @@
 <div class="row center">
-    <div class="col-lg-6">
-
-
 <h1 class="page-heading">Post a new job for:</h1>
 <h2 class="page-subheading"><%= @current_user.first_name %> <%= @current_user.last_name %> </h2>
 <% unless full_address_not_supplied %>
-    <h3><%= full_address(@current_user) %></h3>
+    <h3 class="job-full-address"><%= full_address(@current_user) %></h3>
 <% end %>
+
+    <div class="col-lg-5">
+
+
+
 
 <% if full_address_not_supplied %>
     <p><%= "You can't post a job yet. You haven't provided your address details." %></p>
@@ -17,9 +19,10 @@
     </div>
 <% end %>
 </div>
+  <div class="col-lg-1"></div>
   <div class="col-lg-6 d-flex flex-column justify-content-center">
-        <%= image_tag( 'perfect_lawn.jpg', :class => "image-hero", :alt => "A close up shot of perfect grass" ) %>
-        <%= image_tag( 'rake.jpg', :class => "image-hero", :alt => "A rake tidying up leaves" ) %>
+        <%= image_tag( 'hedge.jpg', :class => "image-hero", :alt => "Hedge being cut by a power tool" ) %>
+        <%= image_tag( 'rake.jpg', :class => "image-hero", :alt => "Rake tidying up leaves" ) %>
   </div>
 
 </div>
