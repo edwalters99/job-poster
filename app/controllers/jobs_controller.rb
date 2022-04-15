@@ -66,6 +66,7 @@ class JobsController < ApplicationController
       end
       if @job.save
         @current_user.jobs << @job
+        flash[:message] = "Job Posted Successfully!"
         redirect_to @job
       else 
         render :new # render the form again to re-attempt job creation

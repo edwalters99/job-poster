@@ -90,3 +90,15 @@ body {
 .job-controls {
    margin-bottom: 3em;
 }
+
+/* job edit page */
+
+.job-edit-images {
+    margin: 1em 0;
+}
+
+.job-edit-images > img {
+    margin: 2em 0;
+    border-radius: 10px;
+    margin: 4px;
+}
