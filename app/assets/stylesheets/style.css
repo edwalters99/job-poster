@@ -41,19 +41,52 @@ body {
 }
 
 .image-hero {
-    width: 100%;
+    max-width: 100%;
+    height: auto;
     border-radius: 20px;
     margin: 1em 0;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
-.login-signuplink {
-    margin-top: 0.5em;
-    font-size: 2rem;
-    display: block
+.signup-container {
+    margin-top: 1em;
+}
+
+.signup-btn {
+    margin-top: 1.5em;
+    transition: 1s all;
+}
+
+.signup-btn:hover,
+.signup-btn:focus {
+    transform: scale(1.2);
 }
 
 .buttons a {
   margin-right: 1em;
   font-family: inherit;
+}
+
+/* show page */
+.comments-header {
+   margin-top: 1em;
+}
+
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image-container > img {
+    border-radius: 10px;
+    margin: 10px;
+    
+}
+
+.comments {
+    margin-bottom: 2em;
+}
+
+.job-controls {
+   margin-bottom: 3em;
 }

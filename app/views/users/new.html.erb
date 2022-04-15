@@ -1,9 +1,9 @@
 
-<h1 class="page-heading">Join the site!</h1>
 
-<div class="row">
 
+<div class="row signup-container">
     <div class="col-md-4">
+        <h1 class="page-heading">Join the site!</h1>
         <% if @user.errors.any? %>
             <ul>
                 <% @user.errors.full_messages.each do |msg| %>
@@ -25,12 +25,12 @@
                 <%= f.label :password_confirmation, :class => 'form-label' %>
                 <%= f.password_field :password_confirmation, :class => 'form-control' %>
 
-                <%= f.submit "Sign Up", :class => 'btn btn-primary btn-lg form-submit' %>
+                <%= f.submit "Sign Up", :class => 'btn btn-primary btn-lg form-submit signup-btn' %>
             <% end %>
          </div>   
     </div>
-    <div class="col-md-8 d-flex flex-column justify-content-center ">
-       <%= image_tag( 'weed_kill.jpg', :class => "image-hero", :alt => "Weeds being spreayed with herbicide" ) %>
+    <div class="col-md-8">
+       <%= image_tag( 'weed_kill.jpg', :class => "image-hero", :alt => "Weeds being sprayed with herbicide" ) %>
     </div>
 </div>
 

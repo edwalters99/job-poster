@@ -15,11 +15,11 @@
    <% end %>
 <% end%>
 
-<ul>
-    <li><%= @job.desc %></li>
-    <li>Price: <%= number_to_currency @job.price, precision: 0 %></li>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item"><%= @job.desc %></li>
+    <li class="list-group-item">Price: <%= number_to_currency @job.price, precision: 0 %></li>
     
-    <li>Address: 
+    <li class="list-group-item">Address: 
      <% if @job.assigned_to.present? && @current_user == @job.user %> <!-- Display house number only when job has been assigned and to job owner -->
         <%= @job.user.address_num %>
     <% end %>
@@ -32,32 +32,34 @@
    <% end%>
 
     
-    
 
     
-    <li>City: <%= @job.user.address_city %></li>
+    <li class="list-group-item">City: <%= @job.user.address_city %></li>
       <% if !@current_user.distance_to(@job.user).nil? &&@current_user.distance_to(@job.user) > 0 %>
-        <li><%= number_with_delimiter(number_with_precision(@current_user.distance_to(@job.user), :precision => 1))%> km away</li>
+        <li class="list-group-item"><%= number_with_delimiter(number_with_precision(@current_user.distance_to(@job.user), :precision => 1))%> km away</li>
     <% end %>
     
-    <li><ul> Categories:
+    <li class="list-group-item list-group-flush">
+    <ul class="list-group list-group-flush"> Categories:
     <% @job.categories.each do |category| %>
-        <li><%= category.name %></li>
+        <li class="list-group-item"><%= category.name %></li>
     <% end  %>
     </ul></li>
 
+
+    <li class="list-group-item image-container">    
     <% @job.images.each do |i| %>
          <%= cl_image_tag(i, :width => 300) %>
     <% end %>
-
-    <li>Posted: <%= time_ago_in_words(@job.created_at) %> ago</li>
-    <li>Last Updated: <%= time_ago_in_words(@job.updated_at) %> ago</li>
+    </li>
+    <li class="list-group-item">Posted: <%= time_ago_in_words(@job.created_at) %> ago</li>
+    <li class="list-group-item">Last Updated: <%= time_ago_in_words(@job.updated_at) %> ago</li>
 
 </ul>
 
 
 
-<strong>Comments:</strong>
+<h4 class="comments-header">Comments:</h4>
   
     <% if @job.comments.length == 0 %>
         <p>No comments yet</p>
@@ -67,9 +69,9 @@
     <%= link_to "Add Comment", new_comment_path %>
  <% end%>
 
-<ul>
+<ul class="list-group comments">
      <% @job.comments.order(:updated_at).reverse_order.each do |comment| %>
-        <li><%= time_ago_in_words(comment.updated_at) %> ago<br>
+        <li class="list-group-item"><%= time_ago_in_words(comment.updated_at) %> ago<br>
         "<%= comment.comment %>" by:  
         <%= comment.user.first_name %>
         <!-- Comment owner only -->
@@ -89,15 +91,16 @@
     <% end %>
 </ul>
 
+<div class="job-controls">
 <!-- Job owner only -->
 <% if @job.user_id == @current_user.id %>  
      <% if @job.assigned_to == nil %>
-        <%= link_to "Edit Job", edit_job_path(@job.id) %>
+        <%= link_to "Edit Job", edit_job_path(@job.id), :class => 'btn btn-danger' %>
     <% end%>
     
-    <%= link_to "Delete Job", job_path(@job.id), :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
+    <%= link_to "Delete Job", job_path(@job.id), :class => 'btn btn-danger', :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
 <% end  %>
-
+</div>
 
 
 
