@@ -1,0 +1,42 @@
+
+    <div class="row row-cols-1 row-cols-md-3 g-5 cards">
+
+        <% @jobs.each do |job| %>
+            <% if job.assigned_to == nil  %>
+                
+                <div class="col">       
+                    <div class="card border-dark bg-dark text-white mb-3 h-100" style="max-width: 15rem;">
+                        <% if job.images.empty? %>
+                            <%= image_tag('placeholder.jpg', :class => "card-img-top", :alt => "Image coming soon")%>
+                        <% else %>
+                            <%= cl_image_tag(job.images[0], :class => "card-img-top", :alt => "Job preview photo")%> 
+                        <% end %>
+
+                        <div class="card-body">
+                            <h5 class="card-title"><%= truncate( job.title, :length => 38 )%></h5>
+                            <%= link_to "", job, :class => "stretched-link" %> <!-- Makes the whole card a link -->
+                            <p class="card-text card-price"><%= number_to_currency job.price, precision: 0 %></p>
+                        </div>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <ul class="list-group list-group-flush"> Categories:
+                                    <% job.categories.each do |category| %>
+                                        <li class="list-group-item"><%= category.name %></li>
+                                    <% end  %>
+                            </li>
+                        </ul>
+                            <li class="list-group-item">Posted: <%= time_ago_in_words(job.created_at) %> ago</li>
+                            <% if !@current_user.distance_to(job.user).nil? && @current_user.distance_to(job.user) > 0 %>
+                                <li class="list-group-item">Distance: <%= number_with_delimiter(number_with_precision(@current_user.distance_to(job.user), :precision => 1))%> km away </li>
+                            <% end %>     
+                        </ul>
+                    </div>
+                </div>
+
+            <% end %>
+        <% end %>
+
+
+
+

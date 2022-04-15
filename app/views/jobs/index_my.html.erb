@@ -9,10 +9,10 @@
         <div class="box"><%= job.title  %></div>
 
         <% if job.assigned_to.nil? %>
-            <%= link_to "Edit", edit_job_path(job.id) %>
+            <%= link_to "Edit", edit_job_path(job) %>
         <% end %>
         
-        <%= link_to "Delete", job_path(job.id), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
+        <%= link_to "Delete", job_path(job), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
     <% end%>
 <% end%>
 

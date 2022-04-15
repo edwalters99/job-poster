@@ -66,12 +66,44 @@ body {
     transform: scale(1.2);
 }
 
-.buttons a {
-  margin-right: 1em;
+.index-links {
+    margin-top: 2em;
+ 
+}
+
+.index-links a {
   font-family: inherit;
+  margin-right: 1em;
+  font-size: 1.5rem;
 }
 
 /* show page */
+
+.job-show-header, .job-show-subhead {
+   margin-left: 15px;
+   margin-top: .5em;
+}
+
+.job-conditionals {
+    margin: 2em 0 2em 15px;
+    color: blue;
+}
+
+.job-assigned {
+    margin-bottom: 1em;
+}
+
+.job-desc-text {
+    font-size: 1.1rem;
+    font-weight: bolder;
+}
+
+.job-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: .25em;
+}
+
 .comments-header {
    margin-top: 1em;
 }
@@ -79,6 +111,7 @@ body {
 .image-container {
     display: flex;
     flex-wrap: wrap;
+    margin-left: -12px;;
 }
 
 .image-container > img {
@@ -123,13 +156,18 @@ body {
     margin-top: 3em;
 }
 
+
 .image-hero-homepage {
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
+.home-search-header {
+    margin-top: 1em;
+}
+
 .home-search-container {
-    display: flex;
-    flex-direction: column;
+   margin-top: 1em;
+   margin-bottom: 1em;
 }
 
 .form-control-homesearch {
@@ -150,4 +188,24 @@ body {
 .home-link {
     font-size: 1.5rem;
 }
+
+
+
+
+/* index page */
+
+.cards {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+
+}
+
+.card-price {
+    color: rgb(23, 171, 190);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+
+
 
