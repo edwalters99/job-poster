@@ -28,6 +28,7 @@ class UsersController < ApplicationController
   def update
     @user = @current_user
     if @user.update user_params
+      flash[:message] = "Profile Updated!"
       redirect_to root_path
     else
       render :edit # re-render form to try again

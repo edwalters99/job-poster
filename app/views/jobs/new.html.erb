@@ -1,12 +1,24 @@
+<div class="row center">
+    <div class="col-lg-6">
 
 
-<h1>Post a new job for:</h1>
-<h2><%= @current_user.first_name %> <%= @current_user.last_name %> </h2>
-<h3><%= full_address(@current_user) %></h3>
+<h1 class="page-heading">Post a new job for:</h1>
+<h2 class="page-subheading"><%= @current_user.first_name %> <%= @current_user.last_name %> </h2>
+<% unless full_address_not_supplied %>
+    <h3><%= full_address(@current_user) %></h3>
+<% end %>
 
 <% if full_address_not_supplied %>
     <p><%= "You can't post a job yet. You haven't provided your address details." %></p>
     <%= link_to "Update your profile now!", edit_user_path(@current_user), :class => 'btn btn-warning' %></p>
 <% else %>
-    <%= render :partial => 'form' %>
+    <div class="form">
+        <%= render :partial => 'form' %>
+    </div>
 <% end %>
+</div>
+  <div class="col-lg-6 d-flex flex-column justify-content-center">
+  <%= image_tag( 'perfect_lawn.jpg', :class => "image-hero", :alt => "A close up shot of perfect grass" ) %>
+  </div>
+
+</div>

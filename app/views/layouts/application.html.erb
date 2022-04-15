@@ -34,7 +34,7 @@
                   <%= link_to "My Posts", my_jobs_path(@current_user), class: "nav-link" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "My Assigned", my_assigned_jobs_path(@current_user.id), class: "nav-link" %>
+                  <%= link_to "My Assigned", my_assigned_jobs_path(@current_user), class: "nav-link" %>
                 </li>
                 <li class="nav-item">
                   <%= link_to "Edit My Profile", edit_user_path(@current_user), class: "nav-link" %>
@@ -58,6 +58,13 @@
           <%= flash[:message] %>
         </div>
       <% end %>
+    
+    <% if flash[:alert].present? %>
+        <div class="alert alert-danger" role="alert">
+          <%= flash[:alert] %>
+        </div>
+    <% end %>
+      
     
       <%= yield %>
 

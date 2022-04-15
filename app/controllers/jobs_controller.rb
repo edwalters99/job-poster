@@ -6,7 +6,7 @@ class JobsController < ApplicationController
         @jobs = Job.order(created_at: :desc)
       elsif
         params[:sort] == "created_at_reverse"
-          @jobs = Job.order(:created_at)
+        @jobs = Job.order(:created_at)
       elsif
         params[:sort] == "price"
           @jobs = Job.order(:price)

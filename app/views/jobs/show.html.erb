@@ -37,7 +37,7 @@
     
     <li>City: <%= @job.user.address_city %></li>
       <% if !@current_user.distance_to(@job.user).nil? &&@current_user.distance_to(@job.user) > 0 %>
-        <li><%= number_to_human(@current_user.distance_to(@job.user), :precision => 2) %> km away</li>
+        <li><%= number_with_delimiter(number_with_precision(@current_user.distance_to(@job.user), :precision => 1))%> km away</li>
     <% end %>
     
     <li><ul> Categories:

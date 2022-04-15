@@ -6,8 +6,10 @@ class SessionController < ApplicationController
     user = User.find_by :email => params[:email]
     if user.present? && user.authenticate(params[:password])
     session[:user_id] = user.id
+    flash[:message] = "Login Successful - Welcome to the site #{ user.first_name }"
     redirect_to root_path
     else
+      flash[:alert] = "Login Failed - Incorrect sign in details"
       redirect_to login_path
     end
     

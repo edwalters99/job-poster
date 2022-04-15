@@ -1,15 +1,26 @@
-<h1>Welcome to YardFixer</h1>
-<div class="form">
-    <%= form_tag login_path do  %>
-    <%= label_tag :email, nil, :class => 'form-label' %>
-    <%= email_field_tag :email, nil, :class => 'form-control' %>
+<h1 class="page-heading">Welcome to YardFixer</h1>
+<h2 class="page-subheading">Solve your gardening problems the easy way</h2>
+<div class="row">
+    <div class="col-md-8">
+          <%= image_tag( 'mower.jpg', :class => "image-hero", :alt => "A lawn mower cutting overgrown grass into a neat line" ) %>
+    </div>
+      
+    <div class="col-md-4 d-flex flex-column justify-content-center ">
+        <div class="form" >
+            <%= form_tag login_path do  %>
+            <%= label_tag :email, nil, :class => 'form-label' %>
+            <%= email_field_tag :email, nil, :class => 'form-control' %>
 
-    <%= label_tag :password, nil, :class => 'form-label' %>
-    <%= password_field_tag :password, nil, :class => 'form-control' %>
+            <%= label_tag :password, nil, :class => 'form-label' %>
+            <%= password_field_tag :password, nil, :class => 'form-control' %>
 
-    <%= submit_tag "Sign in", :class => 'btn btn-warning' %>
-    <% end %>
+            <%= submit_tag "Sign in", :class => 'btn btn-warning btn-lg form-submit' %>
+            <%= link_to "Sign up Here", new_user_path, :class => 'login-signuplink' %>
+            <% end %>
+        </div>
+    </div>
 </div>
-<h2><%= link_to "Sign up Here", new_user_path %></h2>
+
+
 
 
