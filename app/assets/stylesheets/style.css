@@ -53,3 +53,7 @@ body {
     display: block
 }
 
+.buttons a {
+  margin-right: 1em;
+  font-family: inherit;
+}

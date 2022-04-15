@@ -1,11 +1,14 @@
-<div class="title-container">
+
     <h1>All Jobs</h1>
-    <%= link_to "Sort by Newest to Oldest", :sort => "created_at" %>
+    <div class="buttons">
+      <%= link_to "Sort by Newest to Oldest", :sort => "created_at" %>
     <%= link_to "Sort by Oldest to Newest", :sort => "created_at_reverse" %>
     <%= link_to "Sort by Price Low to High", :sort => "price" %>
     <%= link_to "Sort by Price High to Low", :sort => "price_reverse" %>
     <%= link_to "Jobs near me",  :sort => "distance" %>
-</div>
+    
+    </div>
+
 
 
 
