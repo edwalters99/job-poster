@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
     before_action :check_for_login  #only allow access if logged in
+
   
     def index
       if params[:sort] == "created_at"
@@ -15,7 +16,11 @@ class JobsController < ApplicationController
           @jobs = Job.order(price: :desc)
       elsif
         params[:sort] == "distance"
-        @jobs = User.near([@current_user.latitude, @current_user.longitude]).map(&:jobs).flatten
+        if full_address_not_supplied
+          flash[:alert] = "Update address in your profile to see Jobs near you."
+        end
+        @jobs = User.near([@current_user.latitude, @current_user.longitude]).map(&:jobs).
+        flatten
       else
           @jobs = Job.order(params[:created_at])
       end
@@ -130,5 +135,9 @@ class JobsController < ApplicationController
     def job_params
       params.require(:job).permit(:title, :desc, :price, :assignee_user_id, :category_ids => [])
     end
+
+    def full_address_not_supplied
+      @current_user.address_num.blank? || @current_user.address_street.blank? ||  @current_user.address_suburb.blank? || @current_user.address_city.blank? || @current_user.address_country.blank? ||  @current_user.address_postcode.blank? 
+  end
 
 end
