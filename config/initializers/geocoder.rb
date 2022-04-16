@@ -8,7 +8,7 @@ Geocoder.configure(
   # http_proxy: nil,            # HTTP proxy server (user:pass@host:port)
   # https_proxy: nil,           # HTTPS proxy server (user:pass@host:port)
   api_key: ENV["GOOGLE_API_KEY"],
-  use_https: true               # API key for geocoding service
+  use_https: true,               # API key for geocoding service
   # cache: nil,                 # cache object (must respond to #[], #[]=, and #del)
   # cache_prefix: 'geocoder:',  # DEPRECATED, please use cache_options[:prefix] instead
 
@@ -18,7 +18,7 @@ Geocoder.configure(
   # always_raise: [],
 
   # Calculation options
-  # units: :mi,                 # :km for kilometers or :mi for miles
+  units: :km                 # :km for kilometers or :mi for miles
   # distances: :linear          # :spherical or :linear
 
   # Cache configuration
