@@ -100,7 +100,7 @@
 <!-- Job owner only -->
 <% if @job.user_id == @current_user.id %>  
      <% if @job.assigned_to == nil %>
-        <%= link_to "Edit Job", edit_job_path(@job.id), :class => 'btn btn-danger' %>
+        <%= link_to "Edit Job", edit_job_path(@job.id), :class => 'btn btn-warning' %>
     <% end%>
     
     <%= link_to "Delete Job", job_path(@job.id), :class => 'btn btn-danger', :method => 'delete', :data => { :confirm => 'Are you sure?' } %>

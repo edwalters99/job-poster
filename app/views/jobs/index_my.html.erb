@@ -1,19 +1,67 @@
-<h1><%= @current_user.first_name %>'s Jobs</h1>
+<h1 class="page-heading"><%= @current_user.first_name %>'s Jobs</h1>
 
-<% if @jobs.length == 0 %>
- You don't have any jobs yet! Why not
-<%= link_to "Post A New Job", new_job_path  %>
+<% if @jobs.empty? %>
+    You don't have any jobs yet! Why not
+    <%= link_to "Post A New Job", new_job_path, :class => "btn btn-primary btn-cta" %>
 <% end  %>
-<% @jobs.each do |job| %>
-    <%= link_to job_path(job) do %>
-        <div class="box"><%= job.title  %></div>
 
-        <% if job.assigned_to.nil? %>
-            <%= link_to "Edit", edit_job_path(job) %>
-        <% end %>
+
+
+<div class="row row-cols-1 row-cols-md-3 g-5 cards">
+
+    <% @jobs.each do |job| %>
+            
+        <div class="col">       
+            <div class="card border-dark bg-dark text-white mb-3 h-100" style="max-width: 15rem;">
+                <% if job.images.empty? %>
+                    <%= image_tag('placeholder.jpg', :class => "card-img-top", :alt => "Image coming soon")%>
+                <% else %>
+                    <%= cl_image_tag(job.images[0], :class => "card-img-top", :alt => "Job preview photo")%> 
+                <% end %>
+
+                <div class="card-body">
+                    <h5 class="card-title"><%= truncate( job.title, :length => 38 )%></h5>
+                    <%= link_to "", job, :class => "stretched-link" %> <!-- Makes the whole card a link -->
+                    <p class="card-text card-price"><%= number_to_currency job.price, precision: 0 %></p>
+                        
+                    <% if job.assigned_to.nil? %>
+                        <%= link_to "Edit", edit_job_path(job), :class => 'btn btn-warning card-btn-edit' %>
+                    <% else %>
+                        <%= link_to "Assigned", edit_job_path(job), :class => 'btn btn-primary card-btn-edit' %>
+                    <% end %>
+                    
+                    <%= link_to "Delete", job_path(job), :class => 'btn btn-danger card-btn-delete', :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
+
+                    
+                </div>
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <ul class="list-group list-group-flush"> Categories:
+                            <% job.categories.each do |category| %>
+                                <li class="list-group-item"><%= category.name %></li>
+                            <% end  %>
+                    </li>
+                </ul>
+                    <li class="list-group-item">Posted: <%= time_ago_in_words(job.created_at) %> ago</li>
+                    <% if !@current_user.distance_to(job.user).nil? && @current_user.distance_to(job.user) > 0 %>
+                        <li class="list-group-item">Distance: <%= number_with_delimiter(number_with_precision(@current_user.distance_to(job.user), :precision => 1))%> km away </li>
+                    <% end %>     
+                </ul>
+            </div>
+        </div>
+
         
-        <%= link_to "Delete", job_path(job), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
-    <% end%>
-<% end%>
+    <% end %>
+
+
+
+
+
+
+
+
+
+ 
 
 
