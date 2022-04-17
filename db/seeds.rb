@@ -39,9 +39,10 @@ puts "#{ Comment.count } comments"
 
 Category.destroy_all
 
-t1 = Category.create :name => "Lawn mowing / edging"
+t1 = Category.create :name => "Lawn mowing"
 t2 = Category.create :name => "Yard tidy up"
 t3 = Category.create :name => "Weeding"
+t4 = Category.create :name => "Other"
 
 puts "#{ Category.count } categories"
 
