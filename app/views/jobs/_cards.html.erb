@@ -9,7 +9,7 @@
                         <% if job.images.empty? %>
                             <%= image_tag('placeholder.jpg', :class => "card-img-top", :alt => "Image coming soon")%>
                         <% else %>
-                            <%= cl_image_tag(job.images[0], :quality => 'auto', :fetch_format => 'auto', :transformation => {:dpr => 'auto', :responsive => true, :width => 'auto'}, :class => "card-img-top", :alt => "Job preview photo")%> 
+                            <%= cl_image_tag(job.images[0], :quality => 'auto', :fetch_format => 'auto', :transformation => {:dpr => 'auto', :responsive => true, :width => 200}, :class => "card-img-top", :alt => "Job preview photo")%> 
                         <% end %>
 
                         <div class="card-body">
