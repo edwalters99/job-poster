@@ -29,7 +29,7 @@ puts "#{ Job.count } jobs"
 
 Comment.destroy_all
 
-c1 = Comment.create :comment => "I'd be interested in doing this job. Would you take $20 less?"
+c1 = Comment.create :comment => "I'd be interested in doing this job. Would you pay $20 more?"
 
 c2 = Comment.create :comment => "How big is the yard area?"
 

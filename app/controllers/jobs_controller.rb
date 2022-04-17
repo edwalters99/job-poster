@@ -22,7 +22,7 @@ class JobsController < ApplicationController
         @jobs = User.near([@current_user.latitude, @current_user.longitude]).map(&:jobs).
         flatten
       else
-          @jobs = Job.order(params[:created_at])
+          @jobs = Job.order(created_at: :desc)
       end
     end
    

@@ -21,13 +21,12 @@
 
                 <div class="card-body">
                     <h5 class="card-title"><%= truncate( job.title, :length => 38 )%></h5>
-                    <%= link_to "", job, :class => "stretched-link" %> <!-- Makes the whole card a link -->
                     <p class="card-text card-price"><%= number_to_currency job.price, precision: 0 %></p>
                         
                     <% if job.assigned_to.nil? %>
                         <%= link_to "Edit", edit_job_path(job), :class => 'btn btn-warning card-btn-edit' %>
                     <% else %>
-                        <%= link_to "Assigned", edit_job_path(job), :class => 'btn btn-primary card-btn-edit' %>
+                        <%= link_to "Assigned", job, :class => 'btn btn-primary card-btn-assigned' %>
                     <% end %>
                     
                     <%= link_to "View", job, :class => 'btn btn-success card-btn-view' %>

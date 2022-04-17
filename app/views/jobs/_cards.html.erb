@@ -6,6 +6,8 @@
                 
                 <div class="col">       
                     <div class="card border-dark bg-dark text-white mb-3 h-100" style="max-width: 15rem;">
+                     <!-- Makes the whole card a link !-->
+                     <%= link_to "", job, :class => "stretched-link" %> 
                         <% if job.images.empty? %>
                             <%= image_tag('placeholder.jpg', :class => "card-img-top", :alt => "Image coming soon")%>
                         <% else %>
@@ -14,7 +16,6 @@
 
                         <div class="card-body">
                             <h5 class="card-title"><%= truncate( job.title, :length => 38 )%></h5>
-                            <%= link_to "", job, :class => "stretched-link" %> <!-- Makes the whole card a link -->
                             <p class="card-text card-price"><%= number_to_currency job.price, precision: 0 %></p>
                         </div>
 

@@ -35,9 +35,32 @@ a {
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
 .form-check label {
-    margin-right: 10px;
+    margin-right: 15px;
     margin-left: 5px;
+}
+
+@media(max-width:465px) {
+    .form-check label {
+        font-size: 0.95em;
+        margin-right: 15px;
+        margin-left: 5px;  
+    }
+}
+
+@media(max-width:451px) {
+    .form-check label {
+        font-size: 0.8em;
+        margin-right: 15px;
+        margin-left: 5px;  
+    }
+}
+
+@media(max-width:409px) {
+    .form-check  {
+         display: flex;
+    }
 }
 
 .form-group {
@@ -124,8 +147,7 @@ a {
     margin-bottom: 2em;
 }
 
-
-.job-controls {
+.edit-controls {
    margin-bottom: 3em;
 }
 
@@ -139,6 +161,10 @@ a {
     margin: 2em 0;
     border-radius: 10px;
     margin: 4px;
+}
+
+.edit-controls {
+    margin-bottom: 2em; 
 }
 
 /* comments new */
@@ -250,6 +276,10 @@ a {
 .card-btn-edit, .card-btn-view {
     position: absolute;
     bottom: 5px; 
+}
+
+.card-btn-assigned {
+    cursor: initial;
 }
 
 .card-btn-view {

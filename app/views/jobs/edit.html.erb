@@ -40,8 +40,10 @@
                 <%= cl_image_tag(i, :quality => 'auto', :fetch_format => 'auto',:height => 100, :transformation => {:dpr => 'auto', :responsive => true, :height => 100, :width => 'auto'}) %>
             <% end %>
         </div>
-        <%= link_to "Delete all photos", delete_photos_path(@job), :class => 'btn btn-danger', :data => { :confirm => 'Are you sure?' } %>
-        <%= link_to "Add photos", add_photos_path(@job.id), :class => 'btn btn-warning' %>
+        <div class="edit-controls">
+            <%= link_to "Delete all photos", delete_photos_path(@job), :class => 'btn btn-danger', :data => { :confirm => 'Are you sure?' } %>
+            <%= link_to "Add photos", add_photos_path(@job.id), :class => 'btn btn-warning' %>
+        </div>
     </div>
 
     <div class="col-lg-2"></div>
