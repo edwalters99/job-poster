@@ -54,7 +54,7 @@
 
     <li class="list-group-item image-container">    
     <% @job.images.each do |i| %>
-         <%= cl_image_tag(i, :width => 300) %>
+         <%= cl_image_tag(i, :quality => 'auto', :fetch_format => 'auto', :transformation => {:dpr => 'auto', :responsive => true, :width => 'auto'}, :width => 300) %>
     <% end %>
     </li>
     <li class="list-group-item">Posted: <%= time_ago_in_words(@job.created_at) %> ago</li>

@@ -37,7 +37,7 @@
 
         <div class="job-edit-images">
             <% @job.images.each do |i| %>
-                <%= cl_image_tag(i, :height => 100) %>
+                <%= cl_image_tag(i, :quality => 'auto', :fetch_format => 'auto',:height => 100, :transformation => {:dpr => 'auto', :responsive => true, :width => 'auto'}) %>
             <% end %>
         </div>
         <%= link_to "Delete all photos", delete_photos_path(@job), :class => 'btn btn-danger', :data => { :confirm => 'Are you sure?' } %>
