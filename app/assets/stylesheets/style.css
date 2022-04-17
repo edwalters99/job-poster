@@ -247,12 +247,12 @@ a {
     margin-left: .5em;
 }
 
-.card-btn-edit, .card-btn-delete {
+.card-btn-edit, .card-btn-view {
     position: absolute;
     bottom: 5px; 
 }
 
-.card-btn-delete {
+.card-btn-view {
     right: 2px;
 }
 

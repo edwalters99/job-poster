@@ -80,16 +80,16 @@
         "<%= comment.comment %>" by:  
         <%= comment.user.first_name %>
         <!-- Comment owner only -->
-        <% if comment.user_id == @current_user.id && @job.assigned_to == nil %>
+        <% if comment.user_id == @current_user.id && @job.assigned_to.nil? %>
             <div><%= link_to "Edit comment", edit_comment_path(comment) %>
             <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?' } %></div>
         <% end  %>
         <!-- Assign job button - Job owner only and if job is unassigned -->
-        <% if @job.user_id == @current_user.id && @job.assigned_to == nil && comment.user_id != @current_user.id %>
+        <% if @job.user_id == @current_user.id && @job.assigned_to.nil? && comment.user_id != @current_user.id %>
         <%= form_tag assign_job_path do %>
             <%= hidden_field_tag :job_id,  @job.id %>
             <%= hidden_field_tag :assignee_user_id, comment.user.id %>
-            <%= submit_tag "Assign Job to #{ comment.user.first_name }", :data => { :confirm => "Assign Job to #{ comment.user.first_name }?"} %>
+            <%= submit_tag "Assign Job to #{ comment.user.first_name }", :data => { :confirm => "Assign Job to #{ comment.user.first_name }?", :class => 'btn btn-success'} %>
             <% end  %>
         <% end  %>
 
