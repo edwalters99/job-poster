@@ -32,8 +32,14 @@
                 <%= f.label :price, "Price $", :class => 'form-label' %>
                 <%= f.number_field :price, :required => true, :class => 'form-control'  %>
             </div>
+
             <%= f.submit :class => 'btn btn-primary btn-lg form-submit' %>
+          
+      
+
         <% end %>
+
+           <%= link_to "Delete Job", job_path(@job.id), :class => 'btn btn-danger btn-lg edit-deletebtn', :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
 
         <div class="job-edit-images">
             <% @job.images.each do |i| %>

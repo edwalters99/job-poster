@@ -163,6 +163,10 @@ a {
     margin: 4px;
 }
 
+.edit-deletebtn {
+    margin-top: 1em;
+}
+
 .edit-controls {
     margin-bottom: 2em; 
 }
@@ -273,14 +277,12 @@ a {
     margin-left: .5em;
 }
 
-.card-btn-edit, .card-btn-view {
+.card-btn-edit, .card-btn-view, .card-btn-assigned {
     position: absolute;
     bottom: 5px; 
 }
 
-.card-btn-assigned {
-    cursor: initial;
-}
+
 
 .card-btn-view {
     right: 2px;
