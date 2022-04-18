@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-    before_action :check_for_login  #only allow access if logged in
+    before_action :check_for_login  #only allow access if user is logged in
     
     def new
         @comment = Comment.new 
@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
 
     def edit 
         @comment = Comment.find params[:id]
-        check_for_owner @comment  #protects against seeing the edit page for a job other than your own
+        check_for_owner @comment  #protects against seeing the edit page for a job that doesn't belong to the logged in user
     end
 
     def update

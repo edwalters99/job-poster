@@ -5,8 +5,6 @@
     <%= link_to "Post A New Job", new_job_path, :class => "btn btn-primary btn-cta" %>
 <% end  %>
 
-
-
 <div class="row row-cols-1 row-cols-md-3 g-5 cards">
 
     <% @jobs.each do |job| %>
@@ -22,7 +20,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><%= truncate( job.title, :length => 38 )%></h5>
                     <p class="card-text card-price"><%= number_to_currency job.price, precision: 0 %></p>
-                        
+                    
                     <% if job.assigned_to.nil? %>
                         <%= link_to "Edit", edit_job_path(job), :class => 'btn btn-warning card-btn-edit' %>
                     <% else %>
@@ -30,8 +28,6 @@
                     <% end %>
                     
                     <%= link_to "View", job, :class => 'btn btn-success card-btn-view' %>
-
-                    
                 </div>
 
                 <ul class="list-group list-group-flush">
@@ -40,18 +36,17 @@
                             <% job.categories.each do |category| %>
                                 <li class="list-group-item"><%= category.name %></li>
                             <% end  %>
+                        </ul>
                     </li>
-                </ul>
                     <li class="list-group-item">Posted: <%= time_ago_in_words(job.created_at) %> ago</li>
-                    <% if !@current_user.distance_to(job.user).nil? && @current_user.distance_to(job.user) > 0 %>
+                   <% if location_data_valid(@current_user, job) %>
                         <li class="list-group-item">Distance: <%= number_with_delimiter(number_with_precision(@current_user.distance_to(job.user), :precision => 1))%> km away </li>
                     <% end %>     
                 </ul>
             </div>
         </div>
-
-        
     <% end %>
+</div>
 
 
 

@@ -1,21 +1,20 @@
 <h1 class="job-show-header">Job: <%= truncate( @job.title, :length => 60)  %> </h1>
 <h2 class="job-show-subhead">Posted by <%= @job.user.first_name %></h2>
 
-<div class="job-conditionals">
-
+<div class="job-conditionals"> 
 
     <% if @job.assigned_to.present? %> <!-- If job has been assigned -->
-    <h2 class="job-assigned">Job has been assigned to: <%= @assigned_user.first_name  %></h2>
+        <h2 class="job-assigned">Job has been assigned to: <%= @assigned_user.first_name  %></h2>
     
-    <% if @current_user == @job.user %> <!-- Display contact details for job owner -->
-        <h2>You can now contact <%= "#{ @assigned_user.first_name } #{ @assigned_user.last_name }" %> </h2>
-        <h3> <%= "#{ @assigned_user.email } #{ @assigned_user.phone }" %> </h3>
-    <% end %>
+        <% if @current_user == @job.user %> <!-- Display contact details for job owner -->
+            <h2>You can now contact <%= "#{ @assigned_user.first_name } #{ @assigned_user.last_name }" %> </h2>
+            <h3> <%= "#{ @assigned_user.email } #{ @assigned_user.phone }" %> </h3>
+        <% end %>
 
         <% if @current_user.id == @job.assigned_to %> <!-- Display contact details for job assignee -->
-        <h2>You have been assigned this job! You can now contact <%= "#{ @job.user.first_name } #{ @job.user.last_name }:" %> </h2>
-        <h3> <%= "#{ @job.user.email } #{ @job.user.phone }" %> </h3>
-    <% end %>
+            <h2>You have been assigned this job! You can now contact <%= "#{ @job.user.first_name } #{ @job.user.last_name }:" %> </h2>
+            <h3> <%= "#{ @job.user.email } #{ @job.user.phone }" %> </h3>
+        <% end %>
     <% end%>
 
 </div>
@@ -25,71 +24,67 @@
     <li class="list-group-item">Price: <span class="job-price"><%= number_to_currency @job.price, precision: 0 %></span></li>
     
     <li class="list-group-item">Address: 
-     <% if @job.assigned_to.present? && @current_user == @job.user %> <!-- Display house number only when job has been assigned and to job owner -->
+     <% if @job.assigned_to.present? && @current_user == @job.user %> <!-- For security, displays house number only when job has been assigned and to job owner -->
         <%= @job.user.address_num %>
     <% end %>
 
-  
    <% if @job.user.latitude != nil && @job.user.longitude != nil %>
         <%= link_to @job.user.address_street, " https://maps.google.com/?ie=UTF8&ll=#{ @job.user.latitude },#{ @job.user.longitude }", target: "_blank" %>
    <% else %>
         <%= @job.user.address_street %>
    <% end%>
 
-    
-
-    
     <li class="list-group-item">City: <%= @job.user.address_city %></li>
-      <% if !@current_user.distance_to(@job.user).nil? && @current_user.distance_to(@job.user) > 0 %>
+      <% if location_data_valid(@current_user, @job) %>
         <li class="list-group-item">Distance: <%= number_with_delimiter(number_with_precision(@current_user.distance_to(@job.user), :precision => 1))%> km away</li>
     <% end %>
     
     <li class="list-group-item list-group-flush">
-    <ul class="list-group list-group-flush"> Categories:
-    <% @job.categories.each do |category| %>
-        <li class="list-group-item"><%= category.name %></li>
-    <% end  %>
-    </ul></li>
-
+        <ul class="list-group list-group-flush"> Categories:
+            <% @job.categories.each do |category| %>
+                <li class="list-group-item"><%= category.name %></li>
+             <% end  %>
+        </ul>
+    </li>
 
     <li class="list-group-item image-container">    
-    <% @job.images.each do |i| %>
-         <%= cl_image_tag(i, :quality => 'auto', :fetch_format => 'auto', :width => 300, :transformation => {:dpr => 'auto', :responsive => true, :width => 300}) %>
-    <% end %>
+        <% @job.images.each do |i| %>
+            <%= cl_image_tag(i, :quality => 'auto', :fetch_format => 'auto', :width => 300, :transformation => {:dpr => 'auto', :responsive => true, :width => 300}) %>
+        <% end %>
     </li>
     <li class="list-group-item">Posted: <%= time_ago_in_words(@job.created_at) %> ago</li>
     <li class="list-group-item">Last Updated: <%= time_ago_in_words(@job.updated_at) %> ago</li>
 
 </ul>
 
-
-
 <h4 class="comments-header">Comments:</h4>
   
-    <% if @job.comments.length == 0 %>
-        <p>No comments yet</p>
-    <% end  %>
+<% if @job.comments.length == 0 %>
+    <p>No comments yet</p>
+<% end  %>
 
- <% if @job.assigned_to == nil %>
+ <% if @job.assigned_to.nil? %>
     <%= link_to "Add Comment", new_comment_path %>
  <% end%>
 
 <ul class="list-group comments">
-     <% @job.comments.order(:updated_at).reverse_order.each do |comment| %>
+    <% @job.comments.order(:updated_at).reverse_order.each do |comment| %>
         <li class="list-group-item"><%= time_ago_in_words(comment.updated_at) %> ago<br>
         "<%= comment.comment %>" by:  
         <%= comment.user.first_name %>
+        
         <!-- Comment owner only -->
         <% if comment.user_id == @current_user.id && @job.assigned_to.nil? %>
             <div><%= link_to "Edit comment", edit_comment_path(comment) %>
             <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?' } %></div>
         <% end  %>
-        <!-- Assign job button - Job owner only and if job is unassigned -->
+
+        <!-- Assign job button - Visible to Job owner only and if job is unassigned -->
         <% if @job.user_id == @current_user.id && @job.assigned_to.nil? && comment.user_id != @current_user.id %>
-        <%= form_tag assign_job_path do %>
-            <%= hidden_field_tag :job_id,  @job.id %>
-            <%= hidden_field_tag :assignee_user_id, comment.user.id %>
-            <%= submit_tag "Assign Job to #{ comment.user.first_name }", :data => { :confirm => "Assign Job to #{ comment.user.first_name }?", :class => 'btn btn-success'} %>
+            <%= form_tag assign_job_path do %>
+                <%= hidden_field_tag :job_id,  @job.id %>
+                <%= hidden_field_tag :assignee_user_id, comment.user.id %>
+                <%= submit_tag "Assign Job to #{ comment.user.first_name }", :data => { :confirm => "Assign Job to #{ comment.user.first_name }?", :class => 'btn btn-success'} %>
             <% end  %>
         <% end  %>
 
@@ -98,13 +93,14 @@
 
 <div class="job-controls">
 <!-- Job owner only -->
-<% if @job.user_id == @current_user.id %>  
-     <% if @job.assigned_to == nil %>
-        <%= link_to "Edit Job", edit_job_path(@job.id), :class => 'btn btn-warning' %>
-    <% end%>
-    
-    <%= link_to "Delete Job", job_path(@job.id), :class => 'btn btn-danger', :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
-<% end  %>
+    <% if @job.user_id == @current_user.id %>  
+        <% if @job.assigned_to.nil? %>
+            <%= link_to "Edit Job", edit_job_path(@job), :class => 'btn btn-warning' %>
+        <% end%>
+        
+        <%= link_to "Delete Job", job_path(@job), :class => 'btn btn-danger', :method => 'delete', :data => { :confirm => 'Are you sure?' } %>
+
+    <% end  %>
 </div>
 
 

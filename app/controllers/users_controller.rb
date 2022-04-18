@@ -20,6 +20,7 @@ class UsersController < ApplicationController
     @user = @current_user
   end
 
+
   def edit_password
     @user = @current_user
   end
@@ -36,11 +37,11 @@ class UsersController < ApplicationController
   end
 
 
-  def destroy #not yet implemented (admin feature?)
-  end
+  # def destroy #not yet implemented (future admin feature?)
+  # end
 
 
-  private # strong params 
+  private 
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :address_num, :address_street, :address_suburb, :address_city, :address_country, :address_postcode, :phone)
     end

@@ -1,6 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 
+/* prevents navigation resizing when the page being opened needs a scrollbar */
 html {
     overflow-y: scroll;
   }
@@ -8,13 +9,6 @@ html {
 body {
     font-family: 'Lato', sans-serif !important;
   }
-
-.box {
-    background-color: aquamarine;
-    width: 100px;
-    padding: 2em;
-    margin: 2em;
-}
 
 .error {
     color: red;
@@ -24,17 +18,17 @@ a {
     margin-right: 1em;
 }
 
-
 .page-heading, .page-subheading {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
 
-
 .form {
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
+/* Job New page */
 
 .form-check label {
     margin-right: 15px;
@@ -63,6 +57,7 @@ a {
     }
 }
 
+
 .form-group {
     margin: 0.5em 0;
 }
@@ -79,6 +74,9 @@ a {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
+
+/* Sign In / Signup Pages */
+
 .signin-container, .signup-container {
     margin-top: 2em;
 }
@@ -94,8 +92,7 @@ a {
 }
 
 
-
-/* show page */
+/* Jobs show page */
 
 .job-show-header, .job-show-subhead {
    margin-left: 15px;
@@ -183,7 +180,6 @@ a {
     margin-top: 3em;
 }
 
-
 .image-hero-homepage {
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
@@ -203,6 +199,7 @@ a {
     transform: translateY(2px);
     margin-right: 1em;
 }
+
 .btn-home-search {
     transition: all 1s;
 }
@@ -214,20 +211,14 @@ a {
 
 .home-link {
     font-size: 1.5rem;
-   
 }
 
-
-
 /* index page */
-
-
 
 .cards {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
-
 
 .card-price {
     color: rgb(23, 171, 190);
@@ -281,8 +272,6 @@ a {
     position: absolute;
     bottom: 5px; 
 }
-
-
 
 .card-btn-view {
     right: 2px;

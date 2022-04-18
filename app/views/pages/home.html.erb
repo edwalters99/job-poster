@@ -3,11 +3,9 @@
         <h1>Welcome to YardFixer</h1>
         <ul>
             <li><%= link_to "All Jobs", jobs_path, :class => 'link-primary home-link' %>
-
             <li><%= link_to "Post a job", new_job_path, :class => 'link-primary home-link'  %></li>
             <li><%= link_to "My Posted Jobs", my_jobs_path(@current_user), :class => 'link-primary home-link' %></li>
             <li><%= link_to "My Assigned Jobs", my_assigned_jobs_path(@current_user), :class => 'link-primary home-link' %></li>
-
             <li><%= link_to "Edit my Profile", edit_user_path(@current_user), :class => 'link-primary home-link' %></li>
             <li><%= link_to "Change Password", edit_user_password_path(@current_user), :class => 'link-primary home-link' %></li>
         </ul>
@@ -20,7 +18,6 @@
                 <%= button_tag "Go", :name => nil, :class => "btn btn-success btn-home-search" %>
             <% end %>
         </div>
-   
     </div>
 
     <div class="col-lg-8 col-md-8">

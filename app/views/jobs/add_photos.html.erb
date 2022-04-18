@@ -1,15 +1,9 @@
 <h1 class="page-heading">Add photos to job</h1>
 
-<!-- Renders validation error messages  -->
-<% if @job.errors.any? %>
-    <ul>
-        <% @job.errors.full_messages.each do |msg| %>
-            <li class="error"> <%= msg %></li>
-        <% end  %>
-    </ul>
-<% end %>
+<%= render :partial => 'errors' %>
 
 <%= form_for @job, :html => { :multipart => true } do |f| %>
     <%= f.file_field :images, :multiple => true, :class => 'form-control', :required => true %>
+    
     <%= f.submit :class => 'btn btn-warning form-submit' %>
 <% end %>

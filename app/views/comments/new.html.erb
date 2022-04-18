@@ -6,22 +6,27 @@
     <%= f.text_field :comment, :class => 'form-control', :required => true %>
     <%= f.hidden_field :job_id, value: @job.id %>
     <%= f.hidden_field :user_id, value: @current_user.id %>
+
     <%= f.submit "Add comment", :class => 'btn btn-success form-submit' %>
 <% end  %>
 
 <% if @job.comments.exists? %>
     <h3 class="comments-new-header">Existing comments:</h3>
     <ul>
-    <% @job.comments.order(:updated_at).reverse_order.each do |comment| %>
-        <li><%= time_ago_in_words(comment.updated_at) %> ago<br>
-        "<%= comment.comment %>" by:  
-        <%= comment.user.first_name %>
-        <!-- Comment owner only -->
-        <% if comment.user_id == @current_user.id %>
-        <div><%= link_to "Edit comment", edit_comment_path(comment) %>
-          <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?'} %></div>
-        <% end  %>
-    <% end %>
-</ul>
+        <% @job.comments.order(:updated_at).reverse_order.each do |comment| %>
+            <li><%= time_ago_in_words(comment.updated_at) %> ago<br>
+             "<%= comment.comment %>" by:  
+            <%= comment.user.first_name %>
+            
+             <!-- Comment owner only -->
+            <% if comment.user_id == @current_user.id %>
+                <div>
+                    <%= link_to "Edit comment", edit_comment_path(comment) %>
+                    <%= link_to "Delete comment", comment_path(comment), :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
+                </div>
+            <% end  %>
+        
+        <% end %>
+    </ul>
 <% end  %>
 

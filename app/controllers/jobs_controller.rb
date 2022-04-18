@@ -1,7 +1,6 @@
 class JobsController < ApplicationController
-    before_action :check_for_login  #only allow access if logged in
+    before_action :check_for_login  #only allow access if user is logged in
 
-  
     def index
       if params[:sort] == "created_at"
         @jobs = Job.order(created_at: :desc)
@@ -16,13 +15,13 @@ class JobsController < ApplicationController
           @jobs = Job.order(price: :desc)
       elsif
         params[:sort] == "distance"
-        if full_address_not_supplied
+        if full_address_not_supplied #helper function below (private)
           flash[:alert] = "Update address in your profile to see Jobs near you."
         end
         @jobs = User.near([@current_user.latitude, @current_user.longitude]).map(&:jobs).
         flatten
       else
-          @jobs = Job.order(created_at: :desc)
+          @jobs = Job.order(created_at: :desc) #default option when page is loaded (newest first)
       end
     end
    
@@ -33,15 +32,15 @@ class JobsController < ApplicationController
 
 
     def index_my_assigned # Jobs assigned to current_user
-      @jobs = Job.all
+      @jobs = Job.all 
     end
 
-    
+
     def search
       if params[:search].blank?
         redirect_to root_path
       else
-        @parameter = params[:search].downcase
+        @parameter = params[:search].downcase.strip
         @jobs = Job.where("lower(title) LIKE :search", search: "%#{ @parameter }%")
       end
     end
@@ -49,12 +48,11 @@ class JobsController < ApplicationController
 
     def show
       @job = Job.find params[:id]
-      if @job.assigned_to.present? # @assigned_user used in view to conditionally render elements of the page
+      if @job.assigned_to.present? # @assigned_user is used in view to conditionally render elements of the page
         @assigned_user = User.find @job.assigned_to
       end
     end
   
-
 
     def new
       @job = Job.new
@@ -63,14 +61,14 @@ class JobsController < ApplicationController
 
     def create
       @job = Job.new job_params
-      if params[:job][:images].present?
+      if params[:job][:images].present? #cloudinary image upload process
         params[:job][:images].each do |image|
           req = Cloudinary::Uploader.upload(image)
           @job.images << req["public_id"]
         end
       end
       if @job.save
-        @current_user.jobs << @job
+        @current_user.jobs << @job 
         flash[:message] = "Job Posted Successfully!"
         redirect_to @job
       else 
@@ -81,14 +79,14 @@ class JobsController < ApplicationController
 
     def edit
       @job = Job.find params[:id]
-      check_for_owner @job  # protects against seeing the edit page for a job other than your own
+      check_for_owner @job  # protects against seeing the edit page for a job that doesn't belong to the current user
     end
 
 
     def update
       @job = Job.find params[:id]
       check_for_owner @job
-      if params[:job][:images].present?
+      if params[:job][:images].present? #cloudinary image upload process
         params[:job][:images].each do |image|
           req = Cloudinary::Uploader.upload(image)
           @job.images << req["public_id"]
@@ -108,16 +106,17 @@ class JobsController < ApplicationController
     end
 
 
-    def assign #assign a job to a comment poster
+    def assign #assign a job to a user (comment owner)
       job = Job.find params[:job_id]
       job.assigned_to = params[:assignee_user_id]
       job.save
-      redirect_to job_path(job)
+      redirect_to job
     end
 
 
     def add_photos
-      @job = Job.find params[:id] 
+      @job = Job.find params[:id]
+      check_for_owner @job 
     end
 
 
@@ -132,7 +131,7 @@ class JobsController < ApplicationController
 
     private
   
-    def job_params
+    def job_params 
       params.require(:job).permit(:title, :desc, :price, :assignee_user_id, :category_ids => [])
     end
 
