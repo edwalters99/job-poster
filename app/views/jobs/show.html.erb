@@ -24,7 +24,7 @@
     <li class="list-group-item">Price: <span class="job-price"><%= number_to_currency @job.price, precision: 0 %></span></li>
     
     <li class="list-group-item">Address: 
-     <% if @job.assigned_to.present? && @current_user == @job.user %> <!-- For security, displays house number only when job has been assigned and to job owner -->
+     <% if @job.assigned_to.present? && @current_user.id == @job.assigned_to %> <!-- Displays house number to assignee when job has been assigned -->
         <%= @job.user.address_num %>
     <% end %>
 
