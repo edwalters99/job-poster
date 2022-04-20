@@ -49,6 +49,14 @@ This is by far the largest software project that I have completed to date. It wa
 
 ---------------------------------------------------------------
 
+## Login
+
+* Username: joebloggs@gmail.com
+* Password: Password123
+* Or [Sign Up](https://yardfixer.herokuapp.com/users/new) for a new account. If a valid postal address is supplied then the geolocation functionality will work (see below).
+
+---------------------------------------------------------------
+
 
 ## Features / User Guide
 
