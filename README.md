@@ -31,7 +31,7 @@ The biggest challenges were getting the Geocoding functionality to work and styl
 
 ## Approach
 
-I started by wireframing the required database tables and their relationships. Then I sketched out the pages needed and how the user would move around the site for the lifecycle of a job post. 
+I started by wireframing the required database tables and their relationships. Then I sketched out the pages needed and how the user would navigate the site for the lifecycle of a job post. 
 
 After setting up my models and database structure, I worked on the core site functionality (Sign Up, Sign In, Job Post, Job Edit and Delete & Comments) with minimal styling. Finally I enabled the assignment of jobs from one user to another.
 
@@ -42,6 +42,13 @@ Lastly, I completed bug testing and UI testing on different devices and made som
 This is by far the largest software project that I have completed to date. It was great experience in prioritizing tasks and planning my time effectively. I aimed to have a Minimum Viable Product half-way through the week. I could then spend the rest of the week implementing extra 'nice-to-have' features and styling. Styling took longer than I anticipated. This was partly due to learning Bootstrap for the first time, and also wanting to add extra CSS styles to get the pages looking exactly how I intended.
 
 ---------------------------------------------------------------
+
+## Object model associations
+
+![Object model associations](/app/assets/images/readme_screenshots/object_models.jpeg)
+
+---------------------------------------------------------------
+
 
 ## Features / User Guide
 
